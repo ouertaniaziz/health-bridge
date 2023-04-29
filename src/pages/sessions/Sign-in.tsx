@@ -2,22 +2,49 @@ import React from 'react';
 
 import { Button, Form, Input, Switch } from 'antd';
 import { LoginOutlined } from '@ant-design/icons/lib';
-
-import PublicLayout from '../../layout/public/Public';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import AuthService from '../../redux/login/auth.Service';
+import PublicLayout from '../../layout/public/Public';
 import { useForm } from 'antd/es/form/Form';
-import { useNavigateHome } from '../../utils/use-navigate-home';
+import {
+  useNavigateDoctor,
+  useNavigateHome,
+  useNavigatePatient
+} from '../../utils/use-navigate-home';
+import authService from '../../redux/login/auth.Service';
 
 const { Item } = Form;
 
 const SignIn = () => {
   const [form] = useForm();
   const navigateHome = useNavigateHome();
+  const navigateDoctor = useNavigateDoctor();
+  const navigatePatient = useNavigatePatient();
+  const dispatch = useDispatch();
 
   const login = () => {
     form
       .validateFields()
-      .then(() => navigateHome())
+      .then((result) => {
+        console.log(result);
+        AuthService.login(result.login, result.password)
+          .then((currentUser) => {
+            if (currentUser) {
+              console.log(currentUser);
+              if (currentUser.role.includes('doctor')) {
+                navigateDoctor();
+              } else if (currentUser.role.includes('patient')) {
+                navigatePatient();
+              } else if (currentUser.role.includes('pharmacist')) {
+                console.log('first');
+              }
+            }
+          })
+          .catch((err) => console.log(err));
+        //
+      })
       .catch(() => null);
   };
 

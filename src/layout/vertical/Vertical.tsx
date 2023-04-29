@@ -39,11 +39,20 @@ const VerticalLayout = ({ children }: Props) => {
   const onSidebarToggle = () => dispatch(toggleSidebar());
 
   const [menuData, setMenuData] = useState([]);
+  const [orientation, setorientation] = useState('');
 
   useEffect(() => {
     async function fetchMenuData() {
-      const result = await axios('/data/menu.json');
-      setMenuData(result.data);
+      if (JSON.parse(localStorage.getItem('user')).role === 'patient') {
+        const result = await axios('/data/menu-patient.json');
+        setorientation('patient');
+        setMenuData(result.data);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
+        const result = await axios('/data/menu-doctor.json');
+        setorientation('doctor');
+
+        setMenuData(result.data);
+      }
     }
 
     fetchMenuData().catch((err) => console.log('Server Error', err));
@@ -83,7 +92,7 @@ const VerticalLayout = ({ children }: Props) => {
       <Menu
         onCloseSidebar={onSidebarToggle}
         opened={settings.sidebarOpened}
-        orientation='vertical'
+        orientation={orientation}
         data={menuData}
       />
 
