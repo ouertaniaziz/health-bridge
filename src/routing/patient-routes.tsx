@@ -4,6 +4,7 @@ import SettingsPage from '../pages/settings/Settings';
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
+import Profile from '../layout/components/Patientoffice/Profile';
 export const patientRoutes: IRoute[] = [
   {
     path: 'settings',
@@ -20,5 +21,8 @@ export const patientRoutes: IRoute[] = [
   {
     path: 'appointments',
     component: AppointmentsPage
+  },{
+    path:'patient-profile',
+    component:Profile
   }
 ];

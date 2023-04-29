@@ -11,6 +11,7 @@ import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes } from './rou
 import './App.less';
 import './App.scss';
 import { useHideLoader } from './hooks/useHideLoader';
+import { PatientProvider } from './layout/components/Patientoffice/provider/PatientProvider';
 
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
@@ -63,9 +64,11 @@ const App = () => {
       </Route>
 
       <Route path='/patient'>
+       <PatientProvider>
         <VerticalLayout>
           <PatientRoutes layout='patient' />
         </VerticalLayout>
+        </PatientProvider>
       </Route>
 
       <Route path='/' exact>

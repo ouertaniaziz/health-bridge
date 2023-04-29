@@ -10,6 +10,15 @@
     },
     "routing": "default-dashboard"
   },
+
+  {
+    "title": "Profile",
+    "icon": {
+      "class": "icofont-user"
+    },
+    "routing": "patient-profile"
+  },
+
   {
     "title": "Appointments",
     "icon": {
@@ -18,17 +27,9 @@
     "routing": "appointments"
   },
   {
-    "title": "Doctors",
+    "title": "Account ",
     "icon": {
-      "class": "icofont-doctor"
-    },
-    "routing": "doctors"
-  },
-
-  {
-    "title": "Payments",
-    "icon": {
-      "class": "icofont-pay"
+      "class": "icofont-ui-settings"
     },
     "routing": "payments"
   }
