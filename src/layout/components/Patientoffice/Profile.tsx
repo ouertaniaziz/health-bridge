@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { usePageData } from '../../../hooks/usePage';
 import { Avatar, Button, Card, Rate, Tag, Timeline, Modal } from 'antd';
 import { IPageData } from '../../../interfaces/page';
@@ -6,7 +6,10 @@ import PatientForm from '../../../layout/components/patients/PatientForm';
 import { IPatient } from '../../../interfaces/patient';
 import { useHistory } from 'react-router-dom';
 import { getpatient } from './service/patientservice';
-
+import { Patientcontext } from './provider/PatientProvider';
+import { useHideLoader } from '../../../hooks/useHideLoader';
+import { IPatientModel } from '../../../interfaces/patientmodel';
+import { IRecord } from '../../../interfaces/Record';
 const pageData: IPageData = {
   title: 'Patient profile',
   fulFilled: true,
@@ -22,7 +25,7 @@ const pageData: IPageData = {
   ]
 };
 
-const ContactInfo = () => {
+const ContactInfo = (props: { Contact: IPatientModel }) => {
   return (
     <Card title='Contact information' className='mb-md-0 with-shadow'>
       <div className='row align-items-center mb-3'>
@@ -30,8 +33,8 @@ const ContactInfo = () => {
           <span className='icofont-ui-touch-phone' style={{ fontSize: 30, color: '#8f8f90' }} />
         </div>
         <div className='col'>
-          <div>Mobile</div>
-          24259068
+          <div></div>
+          {props.Contact.phone}
         </div>
       </div>
 
@@ -41,7 +44,7 @@ const ContactInfo = () => {
         </div>
         <div className='col'>
           <div>Email</div>
-          @liam.joun
+          {props.Contact.email}
         </div>
       </div>
 
@@ -51,26 +54,14 @@ const ContactInfo = () => {
         </div>
         <div className='col'>
           <div>Current Address</div>
-          mohamed taher ben aachour
+          {props.Contact.city}, {props.Contact.state},{props.Contact.postal_code}
         </div>
       </div>
     </Card>
   );
 };
 
-const Skills = () => {
-  const skills = [
-    'HTML',
-    'PHP',
-    'CSS',
-    'SCSS',
-    'ANGUlAR',
-    'REACT',
-    'VUE.JS',
-    'JAVASCRIPT',
-    'TYPESCRIPT'
-  ];
-
+const Skills = (props: { records: IRecord[] }) => {
   return (
     <Card
       title='Medical records'
@@ -78,7 +69,7 @@ const Skills = () => {
       style={{ marginTop: '30px', height: '200px' }}
     >
       <div className='elem-list skills-list'>
-        {skills.map((skill, i) => (
+        {props.records.map((record, i) => (
           <Tag
             key={i}
             color='#336cfb'
@@ -90,7 +81,7 @@ const Skills = () => {
               fontSize: 12
             }}
           >
-            {skill}
+            {record.filename}
           </Tag>
         ))}
       </div>
@@ -115,32 +106,20 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
     status: 'approved',
     id: '10021'
   });
-   const username = JSON.parse(localStorage.getItem('user')).username;
 
-  useEffect(() => {
-    async function getUser() {
-      const response = await getpatient(username);
-      // const data = await response.user;
-      // const record = await response.records;
-      console.log(response);
-      // setrecords(record);
-      //setpatient(data);
-      //console.log(records);
-    }
-    getUser();
-  }, []);
+  const user = useContext(Patientcontext);
+
   //const [visibility, setVisibility] = useState(false);
   //const closeModal = () => setVisibility(false);
   const userCover = `${window.origin}/content/user-profile.jpg`; //photo
-  const userAvatar = `${window.origin}/content/user-400-1.jpg`; //profile pic
+  const userAvatar = `data:image/png;base64,${user.user.image}`; //profile pic
+  const backup = `${window.origin}/content/user-400-1.jpg`;
   //   const handleEditPatient = (patient: IPatient) => {
   //     //setPatient(patient);
   //     setVisibility(true);
   //   };
   const history = useHistory();
-
   const handleShowInfo = () => history.push('/vertical/edit-account');
-
   return (
     <div className='row'>
       <div className='col-md-6 col-sm-12'>
@@ -152,7 +131,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
             className='d-flex align-items-center justify-content-between'
             style={{ marginTop: '-50px' }}
           >
-            <Avatar src={userAvatar} size={100} />
+            <Avatar src={!user.user.image ? userAvatar : userAvatar} size={100} />
 
             <Button
               style={{
@@ -169,9 +148,9 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
           </div>
 
           <div className='d-flex align-items-center justify-content-between'>
-            <h5 className='mb-0 mt-0 mr-1'>Houssem Balti</h5>
-
-            <Rate value={4} />
+            <h5 className='mb-0 mt-0 mr-1'>
+              {user.user.firstname} {user.user.lastname}
+            </h5>
           </div>
 
           <p style={{ color: '#8f8f90' }}>UI/UX Designer</p>
@@ -185,9 +164,9 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
       </div>
 
       <div className='col-md-6 col-sm-12'>
-        <ContactInfo />
+        <ContactInfo Contact={user.user} />
 
-        <Skills />
+        <Skills records={user.records} />
       </div>
       {/* <Modal
         open={visibility}

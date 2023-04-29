@@ -34,9 +34,7 @@ export const PatientProvider = ({ children }: Patientcontextprovidertype) => {
         setuser(response.user);
         //setrecords(partialpatient3);
         setrecords(response.records);
-        console.log('patients', patient);
-        console.log('user', user);
-        console.log('nchallah lyoum ', records);
+        console.log('patient', patient);
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +43,7 @@ export const PatientProvider = ({ children }: Patientcontextprovidertype) => {
     if (patient != null) {
       setstop(true);
     }
-  }, [patient!=null]);
+  }, [patient != null]);
 
   return (
     <Patientcontext.Provider value={{ user, setuser, patient, setpatient, records, setrecords }}>

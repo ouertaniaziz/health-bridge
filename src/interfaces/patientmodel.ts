@@ -8,6 +8,7 @@ export interface IPatientModel {
   role: string;
   phone: string;
   creationDate: string;
+  image: string;
   prescriptions?: [];
   resetCode?: number;
   isVerified?: boolean;
