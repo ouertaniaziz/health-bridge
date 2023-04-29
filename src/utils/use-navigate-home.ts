@@ -6,3 +6,13 @@ export function useNavigateHome() {
 
   return useCallback(() => history.push('/'), []);
 }
+export function useNavigateDoctor() {
+  const history = useHistory();
+  console.log(history, 'tessssgghhhhhh');
+  return useCallback(() => history.replace('/doctor/default-dashboard'), []);
+}
+
+export function useNavigatePatient() {
+  const history = useHistory();
+  return useCallback(() => history.replace('/patient/default-dashboard'), []);
+}

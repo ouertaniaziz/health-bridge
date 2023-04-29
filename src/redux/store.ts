@@ -6,7 +6,7 @@ import { createHashHistory } from 'history';
 import { settingsReducer } from './settings/reducer';
 import { pageDataReducer } from './page-data/reducer';
 import { patientsReducer } from './patients/reducer';
-
+import authReducer from './login/signIn';
 export const history = createHashHistory();
 
 const rootReducer = combineReducers({
@@ -17,7 +17,4 @@ const rootReducer = combineReducers({
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export const store = createStore(
-  rootReducer,
-  compose(applyMiddleware(thunk))
-);
+export const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

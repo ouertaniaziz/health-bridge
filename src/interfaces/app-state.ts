@@ -6,4 +6,5 @@ export interface IAppState {
   pageData: IPageData;
   settings: IAppSettings,
   patients: IPatient[]
+  
 }
