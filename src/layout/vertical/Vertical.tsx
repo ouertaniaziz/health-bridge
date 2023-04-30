@@ -23,12 +23,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from '../../interfaces/app-state';
 
 import './Vertical.scss';
+import { useHideLoader } from '../../hooks/useHideLoader';
+
 
 type Props = {
   children: any;
 };
 
 const VerticalLayout = ({ children }: Props) => {
+
+
   const dispatch = useDispatch();
 
   const settings = useSelector((state: IAppState) => state.settings);

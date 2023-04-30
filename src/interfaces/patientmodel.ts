@@ -1,14 +1,14 @@
 export interface IPatientModel {
-  _id: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-  phone: string;
-  creationDate: string;
-  image: string;
+  _id?: string;
+  firstname?: string;
+  lastname?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+  phone?: string;
+  creationDate?: string;
+  image?: string;
   prescriptions?: [];
   resetCode?: number;
   isVerified?: boolean;

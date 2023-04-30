@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { usePageData } from '../../../hooks/usePage';
-import { Avatar, Button, Card, Rate, Tag, Timeline, Modal } from 'antd';
+import { Avatar, Button, Card, Rate, Tag, Timeline, Modal, Input } from 'antd';
 import { IPageData } from '../../../interfaces/page';
 import PatientForm from '../../../layout/components/patients/PatientForm';
 import { IPatient } from '../../../interfaces/patient';
@@ -10,6 +10,9 @@ import { Patientcontext } from './provider/PatientProvider';
 import { useHideLoader } from '../../../hooks/useHideLoader';
 import { IPatientModel } from '../../../interfaces/patientmodel';
 import { IRecord } from '../../../interfaces/Record';
+import { Hideloaderpatient } from '../../../hooks/hideloaderpatient';
+import { DownloadOutlined } from '@ant-design/icons';
+
 const pageData: IPageData = {
   title: 'Patient profile',
   fulFilled: true,
@@ -33,7 +36,7 @@ const ContactInfo = (props: { Contact: IPatientModel }) => {
           <span className='icofont-ui-touch-phone' style={{ fontSize: 30, color: '#8f8f90' }} />
         </div>
         <div className='col'>
-          <div></div>
+          <div>Phone</div>
           {props.Contact.phone}
         </div>
       </div>
@@ -61,39 +64,22 @@ const ContactInfo = (props: { Contact: IPatientModel }) => {
   );
 };
 
-const Skills = (props: { records: IRecord[] }) => {
-  return (
-    <Card
-      title='Medical records'
-      className='with-shadow mb-0'
-      style={{ marginTop: '30px', height: '200px' }}
-    >
-      <div className='elem-list skills-list'>
-        {props.records.map((record, i) => (
-          <Tag
-            key={i}
-            color='#336cfb'
-            style={{
-              backgroundColor: 'transparent',
-              borderColor: '#336cfb',
-              borderRadius: 500,
-              color: '#336cfb',
-              fontSize: 12
-            }}
-          >
-            {record.filename}
-          </Tag>
-        ))}
-      </div>
-    </Card>
-  );
-};
 type Props = {
   patients: IPatient[];
   onEditPatient?: (patient: IPatient) => void;
 };
 
 const Profile = ({ onEditPatient = () => null }: Props) => {
+  const [opened, setOpened] = useState('');
+
+  function isOpened(modalName: string) {
+    return modalName === opened;
+  }
+
+  function closeModal() {
+    setOpened(null);
+  }
+
   usePageData(pageData);
   const [patient, setPatient] = useState({
     img: '/content/user-400-3.jpg',
@@ -109,6 +95,11 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
 
   const user = useContext(Patientcontext);
 
+  const modals = {
+    withDefaultOverlay: 'withDefaultOverlay'
+  };
+  const [selectedrecord, setselectedrecord] = useState<IRecord | null>();
+
   //const [visibility, setVisibility] = useState(false);
   //const closeModal = () => setVisibility(false);
   const userCover = `${window.origin}/content/user-profile.jpg`; //photo
@@ -119,7 +110,18 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
   //     setVisibility(true);
   //   };
   const history = useHistory();
-  const handleShowInfo = () => history.push('/vertical/edit-account');
+  const handleShowInfo = () => history.push('/patient/edit-patient');
+
+  const handleclick = (event) => {
+    //openModal(modals.withOverlayWithoutClose);
+    //setOpened(modalName);
+    setOpened('withDefaultOverlay');
+    //console.log(event);
+    setselectedrecord(event);
+    console.log(selectedrecord);
+    //console.log(selectedrecord)
+  };
+
   return (
     <div className='row'>
       <div className='col-md-6 col-sm-12'>
@@ -131,7 +133,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
             className='d-flex align-items-center justify-content-between'
             style={{ marginTop: '-50px' }}
           >
-            <Avatar src={!user.user.image ? userAvatar : userAvatar} size={100} />
+            <Avatar src={!user.user.image ? backup : userAvatar} size={100} />
 
             <Button
               style={{
@@ -166,21 +168,54 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
       <div className='col-md-6 col-sm-12'>
         <ContactInfo Contact={user.user} />
 
-        <Skills records={user.records} />
+        <Card
+          title='Medical records'
+          className='with-shadow mb-0'
+          style={{ marginTop: '30px', height: '200px' }}
+        >
+          <div className='elem-list skills-list'>
+            {user.records.map((record, i) => (
+              <Tag
+                key={i}
+                color='#336cfb'
+                style={{
+                  backgroundColor: 'transparent',
+                  borderColor: '#336cfb',
+                  borderRadius: 500,
+                  color: '#336cfb',
+                  fontSize: 12
+                }}
+                onClick={(event) => handleclick(record)}
+              >
+                {record.filename}
+              </Tag>
+            ))}
+          </div>
+        </Card>
       </div>
-      {/* <Modal
-        open={visibility}
-        footer={null}
+      <Modal
+        open={isOpened(modals.withDefaultOverlay)}
+        closable={false}
+        maskClosable={true}
+        title={<h3 className='m-0'>Patient Record</h3>}
         onCancel={closeModal}
-        title={<h3 className='title'>Edit patient</h3>}
+        footer={null}
       >
-        <PatientForm
-          submitText='Update patient'
-          onCancel={closeModal}
-          onSubmit={()=>console.log(patient)}
-          patient={patient}
-        />
-      </Modal> */}
+        <img
+          src={selectedrecord ? `data:image/png;base64,${selectedrecord.file}` : 'none'}
+          alt={selectedrecord ? selectedrecord.filename : 'none'}
+        ></img>
+        <Button
+          type='primary'
+          style={{ backgroundColor: '#52c41a', color: 'white', borderColor: 'white' }}
+          icon={<DownloadOutlined />}
+          href={selectedrecord ? `data:image/png;base64,${selectedrecord.file}` : 'none'}
+          download={selectedrecord ? selectedrecord.filename : 'none'}
+        >
+          {' '}
+          Download
+        </Button>
+      </Modal>
     </div>
   );
 };
