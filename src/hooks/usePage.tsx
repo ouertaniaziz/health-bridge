@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 import { setPageData, updatePageDada } from '../redux/page-data/actions';
 
@@ -24,7 +25,8 @@ export function useFetchPageData<T>(
   const dispatch = useDispatch();
 
   async function getData() {
-    const result = await axios.get(url);
+    const result = await axiosInstance.get(url);
+    console.log(result.data, 'appoiments');
     return result.data;
   }
 
