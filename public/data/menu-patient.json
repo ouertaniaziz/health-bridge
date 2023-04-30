@@ -27,10 +27,10 @@
     "routing": "appointments"
   },
   {
-    "title": "Account ",
+    "title": "prescription ",
     "icon": {
       "class": "icofont-ui-settings"
     },
-    "routing": "payments"
+    "routing": "prescriptions"
   }
 ]

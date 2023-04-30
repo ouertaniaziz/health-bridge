@@ -27,7 +27,7 @@ export function useGetDoctor(name: string) {
   useEffect(() => {
     if (doctors.length === 0) return;
 
-    const newDoctor = doctors.find((doc) => doc.name === name);
+    const newDoctor = doctors.find((doc) => doc.username === name);
 
     if (newDoctor === undefined) return;
 

@@ -12,7 +12,7 @@ type OwnProps = {
 
 type Props = IUser & OwnProps;
 
-const Contact = ({ address, img, name, role, social, className }: Props) => {
+const Contact = ({ city, img, firstname, role, social, className }: Props) => {
   const history = useHistory();
 
   const handleGoToProfile = () => {
@@ -27,7 +27,7 @@ const Contact = ({ address, img, name, role, social, className }: Props) => {
       </div>
 
       <div className='info-box'>
-        <h4 className='name'>{name}</h4>
+        <h4 className='name'>{firstname}</h4>
 
         <p className='role'>{role}</p>
 
@@ -38,7 +38,7 @@ const Contact = ({ address, img, name, role, social, className }: Props) => {
             ))}
         </div>
 
-        <p className='address'>{address}</p>
+        <p className='address'>{city}</p>
 
         <div className='button-box'>
           <Button type='primary' onClick={handleGoToProfile}>
