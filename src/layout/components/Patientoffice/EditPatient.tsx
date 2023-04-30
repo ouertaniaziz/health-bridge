@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Divider, Form, Input, Select } from 'antd';
 
-import ImageLoader from '../../../layout/components/patients/ImageLoader';
+import ImageLoader from './ImageLoader';
 
 import { usePageData } from '../../../hooks/usePage';
 import { useGetUser } from '../../../hooks/useGetUser';
@@ -20,7 +20,7 @@ const pageData: IPageData = {
       route: 'default-dashboard'
     },
     {
-      title: 'Service Pages ',
+      title: 'Patient service ',
       route: 'default-dashboard'
     },
     {
@@ -195,7 +195,7 @@ const PasswordForm = () => {
   );
 };
 
-const EditAccountPage = () => {
+const EditPatient = () => {
   const user = useGetUser();
   usePageData(pageData);
   return (
@@ -210,4 +210,4 @@ const EditAccountPage = () => {
   );
 };
 
-export default EditAccountPage;
+export default EditPatient;

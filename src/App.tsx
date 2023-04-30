@@ -64,11 +64,11 @@ const App = () => {
       </Route>
 
       <Route path='/patient'>
-        <VerticalLayout>
-          <PatientProvider>
+        <PatientProvider>
+          <VerticalLayout>
             <PatientRoutes layout='patient' />
-          </PatientProvider>
-        </VerticalLayout>
+          </VerticalLayout>
+        </PatientProvider>
       </Route>
 
       <Route path='/' exact>
