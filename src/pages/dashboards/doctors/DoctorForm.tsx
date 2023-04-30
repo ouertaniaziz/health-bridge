@@ -20,7 +20,7 @@ type Props = {
 
 const doctorScheme = Yup.object({
   role: Yup.string().required(),
-  name: Yup.string().required(),
+  firstname: Yup.string().required(),
   lastName: Yup.string().required(),
   img: Yup.string().required(),
   gender: Yup.string().required(),
@@ -29,7 +29,7 @@ const doctorScheme = Yup.object({
 
 const initialValues = {
   role: null,
-  name: null,
+  firstname: null,
   lastName: null,
   img: null,
   gender: null,
@@ -52,24 +52,16 @@ const initialValues = {
 
 const DoctorForm = ({ onSubmit, onCancel }: Props) => {
   const [roles] = useFetch<{ value: string }[]>('./data/doctors-specialists.json', []);
-  const {
-    setFieldTouched,
-    handleChange,
-    handleBlur,
-    values,
-    setValues,
-    isValid,
-    errors,
-    touched
-  } = useFormik({
-    initialValues,
-    validationSchema: doctorScheme,
-    validateOnMount: true,
-    initialErrors: { name: null },
-    onSubmit: (values) => {
-      onSubmit(values);
-    }
-  });
+  const { setFieldTouched, handleChange, handleBlur, values, setValues, isValid, errors, touched } =
+    useFormik({
+      initialValues,
+      validationSchema: doctorScheme,
+      validateOnMount: true,
+      initialErrors: { firstname: null },
+      onSubmit: (values) => {
+        onSubmit(values);
+      }
+    });
 
   const handleGenderSelect = (gender) => {
     setValues({ ...values, gender });
@@ -105,13 +97,13 @@ const DoctorForm = ({ onSubmit, onCancel }: Props) => {
 
         <div className='form-group'>
           <Input
-            name='name'
+            name='firstname'
             type='text'
             placeholder='First name'
             onChange={handleChange}
             onBlur={handleBlur}
-            defaultValue={values.name}
-            className={hasError('name')}
+            defaultValue={values.firstname}
+            className={hasError('firstname')}
           />
         </div>
 

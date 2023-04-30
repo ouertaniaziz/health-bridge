@@ -57,11 +57,11 @@ const DoctorForm = ({ doctor }: DoctorFormProps) => {
   return (
     <Form layout='vertical'>
       <FormItem label='First Name'>
-        <Input defaultValue={values.name} placeholder='First Name' />
+        <Input defaultValue={values.firstname} placeholder='First Name' />
       </FormItem>
 
       <FormItem label='Last Name'>
-        <Input defaultValue={values.lastName} placeholder='Last Name' />
+        <Input defaultValue={values.lastname} placeholder='Last Name' />
       </FormItem>
 
       <div className='row'>
@@ -81,7 +81,7 @@ const DoctorForm = ({ doctor }: DoctorFormProps) => {
       </div>
 
       <FormItem label='Address'>
-        <Input.TextArea rows={4} defaultValue={values.address} placeholder='Address' />
+        <Input.TextArea rows={4} defaultValue={values.city} placeholder='Address' />
       </FormItem>
     </Form>
   );

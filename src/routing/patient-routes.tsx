@@ -5,6 +5,7 @@ import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
 import Profile from '../layout/components/Patientoffice/Profile';
+import PrescriptionsPatient from '../pages/medic/PrescriptionsPatient';
 import EditPatient from '../layout/components/Patientoffice/EditPatient';
 export const patientRoutes: IRoute[] = [
   {
@@ -22,9 +23,14 @@ export const patientRoutes: IRoute[] = [
   {
     path: 'appointments',
     component: AppointmentsPage
-  },{
-    path:'patient-profile',
-    component:Profile
+  },
+  {
+    path: 'patient-profile',
+    component: Profile
+  },
+  {
+    path: 'prescriptions',
+    component: PrescriptionsPatient
   },{
     path:'edit-patient',
     component:EditPatient
