@@ -11,6 +11,8 @@ import { useHideLoader } from '../../../hooks/useHideLoader';
 import { IPatientModel } from '../../../interfaces/patientmodel';
 import { IRecord } from '../../../interfaces/Record';
 import { Hideloaderpatient } from '../../../hooks/hideloaderpatient';
+import { DownloadOutlined } from '@ant-design/icons';
+
 const pageData: IPageData = {
   title: 'Patient profile',
   fulFilled: true,
@@ -70,11 +72,6 @@ type Props = {
 const Profile = ({ onEditPatient = () => null }: Props) => {
   const [opened, setOpened] = useState('');
 
-  function openModal(modalName: string) {
-    return () => {
-      setOpened(modalName);
-    };
-  }
   function isOpened(modalName: string) {
     return modalName === opened;
   }
@@ -99,9 +96,9 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
   const user = useContext(Patientcontext);
 
   const modals = {
-    withOverlayWithoutClose: 'withOverlayWithoutClose'
+    withDefaultOverlay: 'withDefaultOverlay'
   };
-  const [selectedrecord, setselectedrecord] = useState<IRecord>();
+  const [selectedrecord, setselectedrecord] = useState<IRecord | null>();
 
   //const [visibility, setVisibility] = useState(false);
   //const closeModal = () => setVisibility(false);
@@ -115,10 +112,13 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
   const history = useHistory();
   const handleShowInfo = () => history.push('/patient/edit-patient');
 
-  const handleclick = (record) => {
-    openModal(modals.withOverlayWithoutClose);
-    console.log(record);
-    // setselectedrecord(record);
+  const handleclick = (event) => {
+    //openModal(modals.withOverlayWithoutClose);
+    //setOpened(modalName);
+    setOpened('withDefaultOverlay');
+    //console.log(event);
+    setselectedrecord(event);
+    console.log(selectedrecord);
     //console.log(selectedrecord)
   };
 
@@ -162,7 +162,6 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
             nihil non omnis temporibus? Blanditiis culpa labore velit.Lorem ipsum dolor sit amet,
             consectetur adipisicing elit. Dicta, provident?
           </p>
-          <Button onClick={openModal(modals.withOverlayWithoutClose)}>Overlay without close</Button>
         </Card>
       </div>
 
@@ -186,7 +185,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
                   color: '#336cfb',
                   fontSize: 12
                 }}
-                onClick={handleclick}
+                onClick={(event) => handleclick(record)}
               >
                 {record.filename}
               </Tag>
@@ -195,15 +194,27 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
         </Card>
       </div>
       <Modal
-        open={isOpened(modals.withOverlayWithoutClose)}
-        closable={true}
-        maskClosable={false}
+        open={isOpened(modals.withDefaultOverlay)}
+        closable={false}
+        maskClosable={true}
         title={<h3 className='m-0'>Patient Record</h3>}
         onCancel={closeModal}
         footer={null}
-
       >
-        <Input placeholder='Subscribe' />
+        <img
+          src={selectedrecord ? `data:image/png;base64,${selectedrecord.file}` : 'none'}
+          alt={selectedrecord ? selectedrecord.filename : 'none'}
+        ></img>
+        <Button
+          type='primary'
+          style={{ backgroundColor: '#52c41a', color: 'white', borderColor: 'white' }}
+          icon={<DownloadOutlined />}
+          href={selectedrecord ? `data:image/png;base64,${selectedrecord.file}` : 'none'}
+          download={selectedrecord ? selectedrecord.filename : 'none'}
+        >
+          {' '}
+          Download
+        </Button>
       </Modal>
     </div>
   );

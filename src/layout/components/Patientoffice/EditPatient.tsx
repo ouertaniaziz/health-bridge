@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 
 import { useFormik } from 'formik';
 import { Button, Divider, Form, Input, Select } from 'antd';
@@ -10,6 +10,7 @@ import { useGetUser } from '../../../hooks/useGetUser';
 
 import { IPageData } from '../../../interfaces/page';
 import { IPatient } from '../../../interfaces/patient';
+import { Patientcontext } from './provider/PatientProvider';
 
 const pageData: IPageData = {
   title: 'Edit account',
@@ -197,6 +198,8 @@ const PasswordForm = () => {
 
 const EditPatient = () => {
   const user = useGetUser();
+  const patient = useContext(Patientcontext)
+
   usePageData(pageData);
   return (
     <div className='stack' style={{ maxWidth: 690, margin: '0 auto' }}>
