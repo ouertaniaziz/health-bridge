@@ -25,6 +25,24 @@ export interface IAppointment {
   injury: string;
   from: string;
   to: string;
+  patientId: string;
+}
+export interface PrescriptionTableProps {
+  data: IMedication[];
+  actions: (medication: IMedication) => JSX.Element;
+}
+export interface IMedication {
+  _id: string;
+  medicationName: string;
+  manufacturer: string;
+  dosageForm: string;
+  dosageStrength: string;
+  validationPeriod: string;
+  expirationDate: string;
+  prescriptionRequired: boolean;
+  numPackets: number;
+  description: string;
+  __v: number;
 }
 
 export interface IBilling {
