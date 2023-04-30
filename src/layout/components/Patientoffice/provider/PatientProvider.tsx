@@ -4,7 +4,7 @@ import { getpatient } from '../service/patientservice';
 import { IRecord } from '../../../../interfaces/Record';
 import { response } from 'express';
 //import { getDoctor } from '../login/service/auth.Service';
-const username = JSON.parse(localStorage.getItem('user')).username;
+const username = JSON.parse(localStorage.getItem('user'))?.username;
 // Créez un contexte et exportez-le
 
 export type Patientcontextype = {
@@ -39,6 +39,7 @@ export const PatientProvider = ({ children }: Patientcontextprovidertype) => {
         console.log(error);
       }
     }
+    
     getUserInfo();
     if (patient != null) {
       setstop(true);
