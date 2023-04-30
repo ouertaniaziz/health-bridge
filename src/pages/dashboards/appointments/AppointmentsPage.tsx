@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { Button } from 'antd';
 
@@ -11,6 +11,8 @@ import { useFetchPageData, usePageData } from '../../../hooks/usePage';
 
 import { IAppointment } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
+import { useNavigatePrescription } from '../../../utils/use-navigate-home';
+import { useHistory } from 'react-router-dom';
 
 const pageData: IPageData = {
   title: 'Appointments',
@@ -27,9 +29,11 @@ const pageData: IPageData = {
 };
 
 const AppointmentsPage = () => {
+  const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
+  const history = useHistory();
   usePageData(pageData);
   const [appointments, setAppointments] = useFetchPageData<IAppointment[]>(
-    './data/appointments.json',
+    `./appointments/doctor/${doctorId}`,
     []
   );
 
@@ -66,6 +70,15 @@ const AppointmentsPage = () => {
 
   const appointmentsActions = (appointment: IAppointment) => (
     <div className='buttons-list nowrap'>
+      <Button
+        onClick={() => {
+          history.replace(`prescription/${appointment.patientId}`);
+        }}
+        shape='circle'
+        type='primary'
+      >
+        <span className='icofont icofont-prescription' />
+      </Button>
       <Button onClick={openEditModal.bind({}, appointment)} shape='circle' type='primary'>
         <span className='icofont icofont-edit-alt' />
       </Button>

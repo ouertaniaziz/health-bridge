@@ -72,7 +72,7 @@ const columns: ColumnProps<IAppointment>[] = [
       </span>
     )
   },
-  { key: 'doctor', title: 'Doctor', dataIndex: 'doctor' },
+  //  { key: 'doctor', title: 'Doctor', dataIndex: 'doctor' },
   { key: 'condition', title: 'Injury/Condition', dataIndex: 'injury' },
   {}
 ];

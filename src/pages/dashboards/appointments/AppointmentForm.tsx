@@ -28,7 +28,8 @@ const emptyAppointment = {
   name: '',
   number: '',
   from: '',
-  to: ''
+  to: '',
+  patientId: ''
 };
 
 const appointmentSchema = Yup.object().shape({
