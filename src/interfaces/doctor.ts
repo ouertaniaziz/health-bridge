@@ -3,11 +3,11 @@ import { IPatient } from './patient';
 import { IAdminPolyclinic } from './adminPolyclinique';
 export interface IDoctor {
   _id?: string;
-  user?: IUser['_id'];
+  user?: IUser;
   aboutMe?: string;
   name?: string;
   password?: string;
   speciality?: 'Carcinologist' | 'cardiologist' | 'Psychiatrist';
-  patients?: IPatient['id'][];
-  adminpolyclinic?: IAdminPolyclinic['_id'];
+  patients?: IPatient[];
+  adminpolyclinic?: IAdminPolyclinic[];
 }
