@@ -6,7 +6,7 @@ import PatientForm from '../../../layout/components/patients/PatientForm';
 import { IPatient } from '../../../interfaces/patient';
 import { useHistory } from 'react-router-dom';
 import { getpatient } from './service/patientservice';
-import { Patientcontext } from './provider/PatientProvider';
+import { Patientcontext, Patientcontextype } from './provider/PatientProvider';
 import { useHideLoader } from '../../../hooks/useHideLoader';
 import { IPatientModel } from '../../../interfaces/patientmodel';
 import { IRecord } from '../../../interfaces/Record';
@@ -93,7 +93,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
     id: '10021'
   });
 
-  const user = useContext(Patientcontext);
+  const user = useContext<Patientcontextype>(Patientcontext);
 
   const modals = {
     withDefaultOverlay: 'withDefaultOverlay'
