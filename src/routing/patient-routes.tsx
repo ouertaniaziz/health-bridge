@@ -7,6 +7,8 @@ import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage'
 import Profile from '../layout/components/Patientoffice/Profile';
 import PrescriptionsPatient from '../pages/medic/PrescriptionsPatient';
 import EditPatient from '../layout/components/Patientoffice/EditPatient';
+import DoctorsPage from '../pages/dashboards/doctors/Doctors';
+import AppoimentsDoctorCalenda from '../pages/services/AppoimentsDoctorCalenda';
 export const patientRoutes: IRoute[] = [
   {
     path: 'settings',
@@ -31,9 +33,17 @@ export const patientRoutes: IRoute[] = [
   {
     path: 'prescriptions',
     component: PrescriptionsPatient
-  },{
-    path:'edit-patient',
-    component:EditPatient
   },
- 
+  {
+    path: 'edit-patient',
+    component: EditPatient
+  },
+  {
+    path: 'doctors',
+    component: DoctorsPage
+  },
+  {
+    path: 'appoimentsCalendar/:doctorId',
+    component: AppoimentsDoctorCalenda
+  }
 ];
