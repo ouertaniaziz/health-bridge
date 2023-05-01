@@ -34,15 +34,6 @@ export const updatepatient = (user) => {
       const status = response.status;
       console.log('response', response.data);
       return status;
-      // if (status === 200) {
-      //   console.log(response.data);
-
-      //   return true;
-      // } else {
-      //   console.log(response.data);
-
-      //   return false;
-      // }
     });
 };
 

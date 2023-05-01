@@ -1,16 +1,19 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
-
+import React, { ChangeEvent, useState, useContext } from 'react';
+import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { Button, Divider, Form, Input, Select } from 'antd';
 
-import ImageLoader from './ImageLoader';
+import ImageLoader from '../../../layout/components/patients/ImageLoader';
 
-import { usePageData } from '../../../hooks/usePage';
+import { usePageData } from '../../..//hooks/usePage';
 import { useGetUser } from '../../../hooks/useGetUser';
 
 import { IPageData } from '../../../interfaces/page';
 import { IPatient } from '../../../interfaces/patient';
-import { Patientcontext } from './provider/PatientProvider';
+import { hasErrorFactory } from '../../../utils/hasError';
+import { Patientcontext, Patientcontextype } from './provider/PatientProvider';
+import { IPatientModel } from '../../../interfaces/patientmodel';
+import { updatepatient } from './service/patientservice';
 
 const pageData: IPageData = {
   title: 'Edit account',
@@ -21,7 +24,7 @@ const pageData: IPageData = {
       route: 'default-dashboard'
     },
     {
-      title: 'Patient service ',
+      title: 'Service Pages ',
       route: 'default-dashboard'
     },
     {
@@ -33,19 +36,26 @@ const pageData: IPageData = {
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-const UserAvatar = ({ src, className = null }) => {
-  return (
-    <div className={`avatar-wrapper ${className}`}>
-      <ImageLoader src={src} size={100} />
-    </div>
-  );
-};
-
 const AccountForm = ({ user }) => {
-  const [submitted, setSubmitted] = useState({ ...user });
-  const { values, setValues, handleSubmit } = useFormik<IPatient>({
-    onSubmit: (values) => setSubmitted(values),
-    initialValues: { ...user }
+  const [submitted, setSubmitted] = useState({});
+  const patient = useContext<Patientcontextype>(Patientcontext);
+  const emptyPatient: IPatientModel = {
+    firstname: patient.user.firstname,
+    lastname: patient.user.lastname,
+    phone: patient.user.phone,
+    email: patient.user.email,
+    city: patient.user.city,
+    postal_code: patient.user.postal_code,
+    gender: patient.user.gender,
+    state: patient.user.state
+  };
+  const { values, setValues, handleSubmit } = useFormik<IPatientModel>({
+    onSubmit: (values) => {
+      //setSubmitted(values);
+      console.log(values);
+      updatepatient({ ...values, _id: patient.user._id });
+    },
+    initialValues: emptyPatient
   });
 
   const handleChange = (
@@ -62,78 +72,116 @@ const AccountForm = ({ user }) => {
 
   return (
     <Form layout='vertical'>
-      <FormItem label='First Name'>
+      {/* <div className={`avatar-wrapper mt-0`} style={{ paddingBottom: '10px' }}>
+        <ImageLoader src={`data:image/png;base64,${values.image}`} size={100} />
+      </div> */}
+      <FormItem
+        label='First Name'
+        rules={[{ required: true }, { min: 3, message: '3' }]}
+        style={{ paddingBottom: '15px' }}
+        name='firstname'
+      >
         <Input
-          name='name'
+          name='firstname'
           onChange={handleChange}
           placeholder='First Name'
-          defaultValue={values.name}
+          defaultValue={values.firstname}
         />
       </FormItem>
 
-      <FormItem label='Last Name'>
+      <FormItem
+        label='Last Name'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='lastname'
+      >
         <Input
-          name='lastName'
+          name='lastname'
           onChange={handleChange}
-          defaultValue={values.lastName}
+          defaultValue={values.lastname}
           placeholder='Last Name'
         />
       </FormItem>
 
-      <FormItem label='Age'>
+      <FormItem
+        label='Phone'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='phone'
+      >
         <Input
           type='number'
-          name='age'
+          name='phone'
           onChange={handleChange}
-          defaultValue={values.age}
-          placeholder='Age'
+          defaultValue={values.phone}
+          placeholder='phone'
         />
       </FormItem>
 
+      <FormItem
+        label='Phone number'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='email'
+      >
+        <Input
+          type='email'
+          name='email'
+          onChange={handleChange}
+          defaultValue={values.email}
+          placeholder='Phone number'
+        />
+      </FormItem>
       <FormItem label='Gender'>
         <Select
           onChange={handleSelectChange('gender')}
           defaultValue={values.gender}
           placeholder='Gender'
         >
-          <Option value='male'>Male</Option>
-          <Option value='female'>Female</Option>
+          <Option value='Male'>Male</Option>
+          <Option value='Female'>Female</Option>
         </Select>
       </FormItem>
 
-      <FormItem label='Phone number'>
+      <FormItem
+        label='City'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='city'
+      >
         <Input
-          type='number'
-          name='number'
+          name='city'
           onChange={handleChange}
-          defaultValue={values.number}
-          placeholder='Phone number'
-        />
-      </FormItem>
-
-      <FormItem label='Address'>
-        <Input.TextArea
-          name='address'
-          onChange={handleChange}
-          rows={4}
-          defaultValue={values.address}
+          defaultValue={values.city}
           placeholder='Address'
         />
       </FormItem>
-
-      <FormItem label='Last visit'>
-        <Input defaultValue={values.lastVisit} placeholder='Last visit' readOnly />
+      <FormItem
+        label='State'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='state'
+      >
+        <Input
+          name='state'
+          onChange={handleChange}
+          defaultValue={values.state}
+          //placeholder='state'
+        />
       </FormItem>
-
-      <FormItem label='Status'>
-        <Select
-          defaultValue={values.status}
-          placeholder='Status'
-          onChange={handleSelectChange('status')}
-        >
-          <Option value='approved'>Approved</Option>
-          <Option value='pending'>Pending</Option>
-        </Select>
+      <FormItem
+        label='postal code'
+        rules={[{ required: true }, { min: 3 }]}
+        style={{ paddingBottom: '15px' }}
+        name='postal_code'
+      >
+        <Input
+          type='number'
+          name='postal_code'
+          onChange={handleChange}
+          defaultValue={values.postal_code}
+          placeholder='Phone number'
+        />
       </FormItem>
 
       <div className='elem-list justify-content-between'>
@@ -198,17 +246,14 @@ const PasswordForm = () => {
 
 const EditPatient = () => {
   const user = useGetUser();
-  const patient = useContext(Patientcontext)
-
   usePageData(pageData);
   return (
     <div className='stack' style={{ maxWidth: 690, margin: '0 auto' }}>
-      <UserAvatar className='mt-0' src={user.img} />
       <AccountForm user={user} />
 
       <Divider />
 
-      <PasswordForm />
+      {/* <PasswordForm /> */}
     </div>
   );
 };

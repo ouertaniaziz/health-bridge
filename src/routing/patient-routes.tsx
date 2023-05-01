@@ -28,5 +28,6 @@ export const patientRoutes: IRoute[] = [
   },{
     path:'edit-patient',
     component:EditPatient
-  }
+  },
+ 
 ];
