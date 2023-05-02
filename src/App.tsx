@@ -6,7 +6,7 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes } from './routing';
+import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes ,donorRoutes} from './routing';
 
 import './App.less';
 import './App.scss';
@@ -33,12 +33,15 @@ const Routes = ({ routes, layout = '' }) => (
 const DefaultRoutes = ({ layout }) => <Routes routes={defaultRoutes} layout={layout} />;
 const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layout} />;
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
+const DonorRoutes = ({ layout }) => <Routes routes={donorRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
   const [doctor, setdoctor] = useState(true);
   const [patient, setpatient] = useState(true);
+  const [donor, setdonor] = useState(true);
+  
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -47,6 +50,10 @@ const App = () => {
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
         setdoctor(false);
       }
+      else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
+        setdonor(false);
+      }
+      
     }
   }, []);
 
@@ -70,6 +77,14 @@ const App = () => {
           </VerticalLayout>
         </PatientProvider>
       </Route>
+      <Route path='/donor'>
+        <PatientProvider>
+          <VerticalLayout>
+            <PatientRoutes layout='donor' />
+          </VerticalLayout>
+        </PatientProvider>
+      </Route>
+
 
       <Route path='/' exact>
         <Redirect to='/public/sign-in' />
