@@ -3,6 +3,7 @@ import { IRoute } from '../interfaces/routing';
 import SettingsPage from '../pages/settings/Settings';
 
 import PatientsPage from '../pages/dashboards/patients/Patients';
+// import PolyclinicsPage from '../pages/dashboards/polyclinics/Polyclinics';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
 import DoctorsPage from '../pages/dashboards/doctors/Doctors';

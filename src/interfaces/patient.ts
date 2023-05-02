@@ -15,6 +15,7 @@ export interface IPatient {
 }
 
 export interface IAppointment {
+  _id?: string;
   img: string;
   name: string;
   email: string;

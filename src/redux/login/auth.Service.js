@@ -66,11 +66,28 @@ export const getPharmacist = () => {
       return response.data;
     });
 };
+
+//getPolyclinic
+export const getPolyclinic = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  return axiosInstance
+    .post('/polyclinic/profile', {
+      userId: user.id
+    })
+    .then((response) => {
+      if (response.data) {
+      }
+
+      return response.data;
+    });
+};
 const authService = {
   addUser,
   login,
   logout,
   getDoctor,
-  getPharmacist
+  getPharmacist,
+  getPolyclinic
 };
 export default authService;
