@@ -1,0 +1,13 @@
+[
+  {
+    "title": "Polyclinic",
+    "groupTitle": true
+  },
+  {
+    "title": "Dashboard",
+    "icon": {
+      "class": "icofont-thermometer-alt"
+    },
+    "routing": "default-dashboard"
+  }
+]
