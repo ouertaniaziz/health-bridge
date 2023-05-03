@@ -158,7 +158,10 @@ const DashboardPage = () => {
 
         <div className='col-12 col-md-4'>
           <Card title={'patients gender'}>
-            <ReactEcharts className='chart-container container-h-300' option={patientsGenderOptions} />
+            <ReactEcharts
+              className='chart-container container-h-300'
+              option={patientsGenderOptions}
+            />
           </Card>
         </div>
 
