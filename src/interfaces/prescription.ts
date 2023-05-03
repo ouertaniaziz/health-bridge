@@ -4,10 +4,13 @@ import { IDoctor } from './doctor';
 import { ITraitement } from './traitement';
 
 export interface IPrescription extends Document {
-  patient: Types.ObjectId | IPatient;
+  _id: Types.ObjectId;
+  patient: IPatient;
   doctor: IDoctor;
   date: Date;
   verified: boolean;
   qrCodeVerif: string;
+  img: string;
   traitement: Types.ObjectId[] | ITraitement[];
 }
+
