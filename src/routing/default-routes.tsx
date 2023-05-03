@@ -2,7 +2,7 @@ import { IRoute } from '../interfaces/routing';
 
 import SettingsPage from '../pages/settings/Settings';
 
-import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/Prescriptions';
+import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';

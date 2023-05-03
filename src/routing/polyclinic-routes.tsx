@@ -4,7 +4,7 @@ import SettingsPage from '../pages/settings/Settings';
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
-import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/Prescriptions';
+import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
 export const polyclinicRoutes: IRoute[] = [
   {
     path: 'settings',
