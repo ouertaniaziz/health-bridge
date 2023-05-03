@@ -32,5 +32,19 @@
       "class": "icofont-ui-settings"
     },
     "routing": "prescriptions"
+  },
+  {
+    "title": "Doctors",
+    "icon": {
+      "class": "icofont-doctor"
+    },
+    "routing": "doctors"
+  },
+  {
+    "title": "Events calendar",
+    "icon": {
+      "class": "icofont-calendar"
+    },
+    "routing": "events-calendar"
   }
 ]
