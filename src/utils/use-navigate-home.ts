@@ -20,3 +20,8 @@ export function useNavigatePrescription(id) {
   const history = useHistory();
   return useCallback(() => history.replace(), []);
 }
+export function useNavigatePolyclinic() {
+  const history = useHistory();
+  console.log(history, 'tessssgghhhhhh');
+  return useCallback(() => history.replace('/polyclinic/default-dashboard'), []);
+}

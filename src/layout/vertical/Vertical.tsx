@@ -56,6 +56,11 @@ const VerticalLayout = ({ children }: Props) => {
         setorientation('doctor');
 
         setMenuData(result.data);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        const result = await axios('/data/menu-polyclinic.json');
+        setorientation('polyclinic');
+
+        setMenuData(result.data);
       }
     }
 
