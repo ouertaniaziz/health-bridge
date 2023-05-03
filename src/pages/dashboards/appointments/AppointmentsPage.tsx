@@ -13,14 +13,13 @@ import { IAppointment } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
 import { useNavigatePrescription } from '../../../utils/use-navigate-home';
 import { useHistory } from 'react-router-dom';
-import { io } from 'socket.io-client';
 
 const pageData: IPageData = {
   title: 'Appointments',
   fulFilled: false,
   breadcrumbs: [
     {
-      title: 'Medicine',
+      title: 'Dashbord',
       route: 'default-dashboard'
     },
     {
@@ -28,7 +27,6 @@ const pageData: IPageData = {
     }
   ]
 };
-const socket = io('http://localhost:3000');
 const AppointmentsPage = () => {
   const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
   const history = useHistory();
@@ -37,11 +35,6 @@ const AppointmentsPage = () => {
     `./appointments/doctor/${doctorId}`,
     []
   );
-  useEffect(() => {
-    socket.on('notification', (id) => {
-      console.log('🚀 ~ file: AppointmentsPage.tsx:42 ~ socket.on ~ id:', id);
-    });
-  }, [socket]);
 
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [addingModalVisibility, setAddingModalVisibility] = useState(false);
