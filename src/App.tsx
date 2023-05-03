@@ -12,6 +12,7 @@ import './App.less';
 import './App.scss';
 import { useHideLoader } from './hooks/useHideLoader';
 import { PatientProvider } from './layout/components/Patientoffice/provider/PatientProvider';
+import Chatgptmodal from './layout/components/Patientoffice/chatgptmodal';
 
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
@@ -65,10 +66,12 @@ const App = () => {
 
       <Route path='/patient'>
         <PatientProvider>
+          
           <VerticalLayout>
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
+        
       </Route>
 
       <Route path='/' exact>
