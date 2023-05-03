@@ -18,6 +18,10 @@ const AppointmentImg = ({ img }) => {
 
 const columns: ColumnProps<IAppointment>[] = [
   {
+    key: 'id',
+    dataIndex: 'img'
+  },
+  {
     key: 'img',
     title: 'Photo',
     dataIndex: 'img',
@@ -93,7 +97,7 @@ const AppointmentsTable = ({ data, actions }: Props) => {
 
   return (
     <Table
-      rowKey='number'
+      rowKey='id'
       dataSource={data}
       columns={displayedColumns}
       pagination={{ hideOnSinglePage: true }}

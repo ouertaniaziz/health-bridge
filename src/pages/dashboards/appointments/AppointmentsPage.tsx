@@ -86,27 +86,28 @@ const AppointmentsPage = () => {
       </Button>
     </div>
   );
+  if (appointments.length === 0) return <div>loading</div>;
+  else
+    return (
+      <>
+        <AppointmentsTable data={appointments} actions={appointmentsActions} />
 
-  return (
-    <>
-      <AppointmentsTable data={appointments} actions={appointmentsActions} />
+        <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
 
-      <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
+        <AddAppointment
+          onClose={closeAddingModal}
+          visible={addingModalVisibility}
+          onSubmit={addAppointment}
+        />
 
-      <AddAppointment
-        onClose={closeAddingModal}
-        visible={addingModalVisibility}
-        onSubmit={addAppointment}
-      />
-
-      <EditAppointment
-        appointment={selectedAppointment}
-        visible={!!selectedAppointment}
-        onClose={closeModal}
-        onEdited={handleEdit}
-      />
-    </>
-  );
+        <EditAppointment
+          appointment={selectedAppointment}
+          visible={!!selectedAppointment}
+          onClose={closeModal}
+          onEdited={handleEdit}
+        />
+      </>
+    );
 };
 
 export default AppointmentsPage;
