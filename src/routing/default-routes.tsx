@@ -10,6 +10,7 @@ import DoctorsPage from '../pages/dashboards/doctors/Doctors';
 import AlertsPage from '../pages/components/AlertsPage';
 import AutocompletePage from '../pages/components/AutocompletePage';
 import BadgesPage from '../pages/components/BadgesPage';
+import DoctorPage from '../pages/dashboards/doctor/DoctorsPage';
 //import ContactsPage from '../pages/components/ContactsPage';
 import InputsPage from '../pages/components/InputsPage';
 import RatingPage from '../pages/components/RatingsPage';
@@ -232,5 +233,9 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'prescriptions',
     component: PrescriptionPolyclinicPage
+  },
+  {
+    path: 'doctor',
+    component: DoctorPage
   }
 ];

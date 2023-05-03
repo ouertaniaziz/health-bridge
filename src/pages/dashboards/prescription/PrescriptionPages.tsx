@@ -8,15 +8,15 @@ import { SendOutlined } from '@ant-design/icons';
 import { useHistory, useParams } from 'react-router-dom';
 import usePost from '../../../hooks/usePost';
 const pageData: IPageData = {
-  title: 'Appointments',
+  title: 'Prescription',
   fulFilled: false,
   breadcrumbs: [
     {
-      title: 'Medicine',
+      title: 'Polyclinic',
       route: 'default-dashboard'
     },
     {
-      title: 'Appointments'
+      title: 'Prescription'
     },
     {
       title: 'Prescription'

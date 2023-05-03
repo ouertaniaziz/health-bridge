@@ -3,7 +3,7 @@ import SettingsPage from '../pages/settings/Settings';
 
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
-import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
+import DoctorPage from '../pages/dashboards/doctor/DoctorsPage';
 import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
 export const polyclinicRoutes: IRoute[] = [
   {
@@ -19,8 +19,8 @@ export const polyclinicRoutes: IRoute[] = [
     component: DashboardPage
   },
   {
-    path: 'appointments',
-    component: AppointmentsPage
+    path: 'doctor',
+    component: DoctorPage
   },
   {
     path: 'prescription/:idPatient',
