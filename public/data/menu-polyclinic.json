@@ -29,6 +29,6 @@
     "icon": {
       "class": "icofont-thermometer-alt"
     },
-    "routing": "prescriptions"
+    "routing": "prescription/:idPatient"
   }
 ]

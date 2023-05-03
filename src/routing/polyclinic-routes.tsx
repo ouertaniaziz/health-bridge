@@ -4,7 +4,7 @@ import SettingsPage from '../pages/settings/Settings';
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
-import PrescriptionPages from '../pages/dashboards/prescription/PrescriptionPages';
+import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPagesPolyclinic';
 export const polyclinicRoutes: IRoute[] = [
   {
     path: 'settings',
@@ -22,5 +22,9 @@ export const polyclinicRoutes: IRoute[] = [
     path: 'appointments',
     component: AppointmentsPage
   },
-  { path: 'prescription/:idPatient', component: PrescriptionPages }
+  {
+    path: 'prescription/:idPatient',
+    component: PrescriptionPolyclinicPage
+  }
 ];
+
