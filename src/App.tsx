@@ -66,12 +66,11 @@ const App = () => {
 
       <Route path='/patient'>
         <PatientProvider>
-          
           <VerticalLayout>
+            {/*           <Chatgptmodal />*/}
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
-        
       </Route>
 
       <Route path='/' exact>

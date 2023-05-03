@@ -16,17 +16,17 @@ export interface IPatient {
 
 export interface IAppointment {
   _id?: string;
-  img: string;
-  name: string;
-  email: string;
-  number: string;
-  date: string;
-  fromTo: string;
-  doctor: string;
-  injury: string;
-  from: string;
-  to: string;
-  patientId: string;
+  img?: string;
+  name?: string;
+  email?: string;
+  number?: string;
+  date?: string;
+  fromTo?: string;
+  doctor?: string;
+  injury?: string;
+  from?: string;
+  to?: string;
+  patientId?: string;
 }
 export interface PrescriptionTableProps {
   data: IMedication[];

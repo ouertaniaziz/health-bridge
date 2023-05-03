@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { Button } from 'antd';
 
@@ -19,7 +19,7 @@ const pageData: IPageData = {
   fulFilled: false,
   breadcrumbs: [
     {
-      title: 'Medicine',
+      title: 'Dashbord',
       route: 'default-dashboard'
     },
     {
@@ -27,7 +27,6 @@ const pageData: IPageData = {
     }
   ]
 };
-
 const AppointmentsPage = () => {
   const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
   const history = useHistory();
