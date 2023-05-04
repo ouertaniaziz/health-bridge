@@ -25,14 +25,11 @@ import { IAppState } from '../../interfaces/app-state';
 import './Vertical.scss';
 import { useHideLoader } from '../../hooks/useHideLoader';
 
-
 type Props = {
   children: any;
 };
 
 const VerticalLayout = ({ children }: Props) => {
-
-
   const dispatch = useDispatch();
 
   const settings = useSelector((state: IAppState) => state.settings);
@@ -99,8 +96,6 @@ const VerticalLayout = ({ children }: Props) => {
         orientation={orientation}
         data={menuData}
       />
-
-      <AddPatient />
 
       <Menu className='assistant-menu' orientation='vertical'>
         <NavLink className='link' to='/vertical/settings' activeClassName='active' replace>

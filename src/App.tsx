@@ -38,18 +38,20 @@ const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={lay
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
-  const [doctor, setdoctor] = useState(true);
-  const [patient, setpatient] = useState(true);
+  const [doctor, setdoctor] = useState(false);
+  const [patient, setpatient] = useState(false);
+  const [NotLogged, setNotLogged] = useState(false);
 
   useEffect(() => {
+    console.log(localStorage.getItem('user'), 'test');
     if (localStorage.getItem('user')) {
       if (JSON.parse(localStorage.getItem('user')).role === 'patient') {
-        setpatient(false);
+        setpatient(true);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
-        setdoctor(false);
-      }
+        setdoctor(true);
+      } else setNotLogged(true);
     }
-  }, []);
+  }, [localStorage]);
 
   useHideLoader();
   return (
@@ -67,15 +69,23 @@ const App = () => {
       <Route path='/patient'>
         <PatientProvider>
           <VerticalLayout>
-            {/*           <Chatgptmodal />*/}
+            <Chatgptmodal />
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
       </Route>
 
-      <Route path='/' exact>
-        <Redirect to='/public/sign-in' />
-      </Route>
+      {(doctor || patient || !localStorage.getItem('user')) && (
+        <Route path='/'>
+          {doctor ? (
+            <Redirect to='/doctor/settings' />
+          ) : patient ? (
+            <Redirect to='/patient/dashboard' />
+          ) : (
+            <Redirect to='/public/sign-in' />
+          )}
+        </Route>
+      )}
       <Route path='/vertical'>
         <VerticalLayout>
           <DefaultRoutes layout='vertical' />
