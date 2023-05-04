@@ -6,13 +6,7 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import {
-  defaultRoutes,
-  sessionRoutes,
-  doctorRoutes,
-  patientRoutes,
-  polyclinicRoutes
-} from './routing';
+import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes } from './routing';
 
 import './App.less';
 import './App.scss';
@@ -40,14 +34,12 @@ const Routes = ({ routes, layout = '' }) => (
 const DefaultRoutes = ({ layout }) => <Routes routes={defaultRoutes} layout={layout} />;
 const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layout} />;
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
-const PolyclinicRoutes = ({ layout }) => <Routes routes={polyclinicRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
   const [doctor, setdoctor] = useState(true);
   const [patient, setpatient] = useState(true);
-  const [polyclinic, setpolyclinic] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -55,8 +47,6 @@ const App = () => {
         setpatient(false);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
         setdoctor(false);
-      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
-        setpolyclinic(false);
       }
     }
   }, []);
@@ -81,12 +71,6 @@ const App = () => {
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
-      </Route>
-
-      <Route path='/polyclinic'>
-        <VerticalLayout>
-          <PolyclinicRoutes layout='polyclinic' />
-        </VerticalLayout>
       </Route>
 
       <Route path='/' exact>

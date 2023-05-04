@@ -1,7 +1,7 @@
 import React, { useState, useEffect, PropsWithChildren } from 'react';
 import { Button } from 'antd';
 import { useFetchPageData, usePageData } from '../../../hooks/usePage';
-import PrescriptionTable from '../../../layout/components/prescription/prescriptionTable';
+import PrescriptionTable from '../../../layout/components/prescription/PrescriptionTable';
 import { IMedication, PrescriptionTableProps } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
 import { SendOutlined } from '@ant-design/icons';

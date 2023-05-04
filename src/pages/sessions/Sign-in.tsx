@@ -11,8 +11,7 @@ import { useForm } from 'antd/es/form/Form';
 import {
   useNavigateDoctor,
   useNavigateHome,
-  useNavigatePatient,
-  useNavigatePolyclinic
+  useNavigatePatient
 } from '../../utils/use-navigate-home';
 import authService from '../../redux/login/auth.Service';
 
@@ -23,7 +22,6 @@ const SignIn = () => {
   const navigateHome = useNavigateHome();
   const navigateDoctor = useNavigateDoctor();
   const navigatePatient = useNavigatePatient();
-  const navigatePolyclinic = useNavigatePolyclinic();
   const dispatch = useDispatch();
 
   const login = () => {
@@ -41,8 +39,6 @@ const SignIn = () => {
                 navigatePatient();
               } else if (currentUser.role.includes('pharmacist')) {
                 console.log('first');
-              } else if (currentUser.role.includes('adminpolyclinic')) {
-                navigatePolyclinic();
               }
             }
           })
