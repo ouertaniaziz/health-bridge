@@ -1,36 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Badge, Button, Dropdown, Menu } from 'antd';
+import { Badge, Button, Dropdown, Menu, notification } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { INotification } from '../../../interfaces/notification';
 import { io } from 'socket.io-client';
 
-const defaultNotifications = [
-  {
-    text: 'Sara Crouch liked your photo',
-    icon: 'icofont-heart',
-    time: '17 minutes ago'
-  },
-  {
-    text: 'New user registered',
-    icon: 'icofont-users-alt-6',
-    time: '23 minutes ago'
-  },
-  {
-    text: 'Amanda Lie shared your post',
-    icon: 'icofont-share',
-    time: '25 minutes ago'
-  },
-  {
-    text: 'New user registered',
-    icon: 'icofont-users-alt-6',
-    time: '32 minutes ago'
-  },
-  {
-    text: 'You have a new message',
-    icon: 'icofont-ui-message',
-    time: '58 minutes ago'
-  }
-];
+const defaultNotifications = [];
 
 type Props = {
   data?: INotification[];
@@ -47,8 +21,27 @@ const Notifications = ({ data = defaultNotifications }: Props) => {
     setNotifications(data);
   }, [data]);
   useEffect(() => {
-    socket.on('notification', (id) => {
-      if (id === 1) console.log('first');
+    socket.on('notification', (notif) => {
+      const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
+      const newNotification = {
+        text: notif.patient + 'want to have a rdv',
+        icon: 'icofont-tasks-alt',
+        time: notif.time
+      };
+      if (notif.id === doctorId)
+        notification.open({
+          message: 'Notification Title',
+          description:
+            'new patient has booked an appointment with you. The patientname is' +
+            notif.patient +
+            'and the date and time of their appointment are scheduled for  ' +
+            notif.time +
+            '. If you require any further information about the patient or their medical condition, please do not hesitate to contact me.',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          }
+        });
+      setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
     });
   }, [socket]);
 

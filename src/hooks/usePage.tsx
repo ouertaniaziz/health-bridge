@@ -23,9 +23,8 @@ export function useFetchPageData<T>(
 ): [T, (data: T) => void] {
   const [data, setData] = useState<T>(initialState);
   const dispatch = useDispatch();
-
+  const firstFourLetters = url.substring(0, 4);
   async function getData() {
-    console.log(url);
     const result = await axiosInstance.get(url);
     console.log(result.data, 'hhhhhhhh');
     return result.data;
