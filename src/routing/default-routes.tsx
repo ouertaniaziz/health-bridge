@@ -2,6 +2,7 @@ import { IRoute } from '../interfaces/routing';
 
 import SettingsPage from '../pages/settings/Settings';
 
+import TraitementPage from '../pages/dashboards/traitments/TraitmentPages';
 import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
 import PatientsPage from '../pages/dashboards/patients/Patients';
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
@@ -237,5 +238,9 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'doctor',
     component: DoctorPage
+  },
+  {
+    path: 'traitments',
+    component: TraitementPage
   }
 ];

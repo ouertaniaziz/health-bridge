@@ -25,8 +25,15 @@ const DoctorPage = () => {
   const [doctors, setDoctors] = useFetchPageData<IDoctor[]>('./doctor/all', []);
   const [deletingDoctor, setDeletingDoctor] = useState<IDoctor | null>(null);
 
-  const handleDelete = (doctor: IDoctor) => {
-    setDoctors(doctors.filter((d) => d._id !== doctor._id));
+  const handleDelete = async (doctor: IDoctor) => {
+    try {
+      await fetch(`/api/polyclinics/${doctor.adminpolyclinic}/doctors/${doctor._id}`, {
+        method: 'DELETE'
+      });
+      setDoctors(doctors.filter((d) => d._id !== doctor._id));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleCancelDelete = () => {
@@ -80,8 +87,7 @@ const DoctorPage = () => {
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
         visible={!!deletingDoctor}
-      >
-      </Popconfirm>
+      ></Popconfirm>
     </>
   );
 };

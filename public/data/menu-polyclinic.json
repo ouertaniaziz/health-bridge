@@ -20,15 +20,22 @@
   {
     "title": "Patients",
     "icon": {
-      "class": "icofont-thermometer-alt"
+      "class": "icofont-patient-file"
     },
     "routing": "patients"
   },
   {
     "title": "Precriptions",
     "icon": {
-      "class": "icofont-thermometer-alt"
+      "class": "icofont-prescription"
     },
-    "routing": "prescription/:idPatient"
+    "routing": "prescription"
+  },
+  {
+    "title": "Traitments",
+    "icon": {
+      "class": "icofont-ambulance-crescent"
+    },
+    "routing": "traitments"
   }
 ]
