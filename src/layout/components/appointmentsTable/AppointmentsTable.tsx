@@ -82,7 +82,7 @@ type Props = {
   actions?: (appointment: IAppointment) => ReactNode;
 };
 
-const PrescriptionTable = ({ data, actions }: Props) => {
+const AppointmentsTable = ({ data, actions }: Props) => {
   const actionColumn: ColumnProps<IAppointment> = {
     key: 'actions',
     title: 'Actions',
@@ -101,4 +101,4 @@ const PrescriptionTable = ({ data, actions }: Props) => {
   );
 };
 
-export default PrescriptionTable;
+export default AppointmentsTable;
