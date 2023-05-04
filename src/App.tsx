@@ -60,18 +60,19 @@ const App = () => {
 
       <Route path='/doctor'>
         <VerticalLayout>
-          <DoctorRoutes layout='doctor' />
+          <Chatgptmodal />
+            <DoctorRoutes layout='doctor' />
+        
         </VerticalLayout>
       </Route>
 
       <Route path='/patient'>
         <PatientProvider>
-          
           <VerticalLayout>
+          <Chatgptmodal />
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
-        
       </Route>
 
       <Route path='/' exact>
