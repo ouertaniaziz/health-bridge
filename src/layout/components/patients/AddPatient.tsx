@@ -24,14 +24,14 @@ const AddPatient = () => {
     <div className='add-patient'>
       <Button type='primary' onClick={handleClick}>
         <span className='icofont icofont-plus mr-2' style={{ fontSize: '1.3em' }} />
-        Add patient
+        Add 
       </Button>
       <Modal
         open={visible}
         footer={null}
         onCancel={closeModal}
         destroyOnClose
-        title={<h3 className='title'>Add patient</h3>}
+        title={<h3 className='title'>Add</h3>}
       >
         <PatientForm onCancel={closeModal} onSubmit={handleAddPatient} />
       </Modal>

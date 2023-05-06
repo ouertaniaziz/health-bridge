@@ -1,0 +1,54 @@
+[
+    {
+      "title": "Pharmacist",
+      "groupTitle": true
+    },
+    {
+      "title": "Dashboard",
+      "icon": {
+        "class": "icofont-dashboard-web"
+      },
+      "routing": "default-dashboard"
+    }, 
+    {
+        "title": "Medications",
+        "icon": {
+          "class": "icofont-medicine"
+        },
+        "routing": "medications"
+      },
+
+
+
+      {
+        "title": "Profile",
+        "icon": {
+          "class": "icofont-id"
+        },
+        "routing": "profile"
+      },
+
+      
+      {
+        "title": "Prescriptions",
+        "icon": {
+          "class": "icofont-id"
+        },
+        "routing": "prescriptions"
+      },
+
+      {
+        "title": "Pharmacists",
+        "icon": {
+          "class": "icofont-user"
+        },
+        "routing": "pharmacists"
+      }
+
+
+
+  
+
+   
+  ]
+  
