@@ -1,10 +1,12 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
-import { Badge, Table } from 'antd';
+import { Badge, Table, Alert, Button, Space } from 'antd';
 
 import { ColumnProps } from 'antd/es/table';
 import { IMedication } from '../../../interfaces/patient';
 import { IPrescription } from '../../../interfaces/prescription';
+import { relative } from 'path';
+import Popconfirm from 'antd/lib/popconfirm';
 const columns: ColumnProps<IPrescription>[] = [
   {
     key: 'name',
@@ -13,8 +15,8 @@ const columns: ColumnProps<IPrescription>[] = [
     //sorter: (a, b) => (a.medicationName > b.medicationName ? 1 : -1),
     render: (doctor) => (
       <strong>
-        {doctor.firstname + " " } 
-         {doctor.lastname}
+        {doctor.firstname + ' '}
+        {doctor.lastname}
       </strong>
     )
   },
@@ -49,7 +51,7 @@ const columns: ColumnProps<IPrescription>[] = [
     //sorter: (a, b) => (a.dosageStrength > b.dosageStrength ? 1 : -1),
     render: (date) => (
       <span className='nowrap' style={{ color: '#336cfb' }}>
-        {date.slice(0, 10)} 
+        {date.slice(0, 10)}
       </span>
     )
   },
@@ -65,18 +67,19 @@ const PrescriptionTablePolyclinic = ({ data, actions }: Props) => {
     title: 'Actions',
     render: actions
   };
-  useEffect(() => {
-    console.log('table', data);
-  }, [data]);
+ 
   const displayedColumns = actions ? [...columns, actionColumn] : columns;
 
   return (
-    <Table
-      rowKey='number'
-      dataSource={data}
-      columns={displayedColumns}
-      pagination={{ hideOnSinglePage: true }}
-    />
+    <>
+      <Table
+        rowKey='number'
+        dataSource={data}
+        columns={displayedColumns}
+        pagination={{ hideOnSinglePage: true }}
+      />
+    
+    </>
   );
 };
 export default PrescriptionTablePolyclinic;
