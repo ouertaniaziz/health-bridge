@@ -6,6 +6,7 @@ import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import DoctorPage from '../pages/dashboards/doctor/DoctorsPage';
 import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
 import TraitementPage from '../pages/dashboards/traitments/TraitmentPages';
+import PrescriptionPolyclinic from '../layout/components/polyclinic/Prescriptions';
 
 export const polyclinicRoutes: IRoute[] = [
   {
@@ -26,11 +27,10 @@ export const polyclinicRoutes: IRoute[] = [
   },
   {
     path: 'prescription',
-    component: PrescriptionPolyclinicPage
+    component: PrescriptionPolyclinic
   },
   {
     path: 'traitments',
     component: TraitementPage
   }
 ];
-

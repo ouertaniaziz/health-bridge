@@ -3,8 +3,10 @@ export interface IPatient {
   img?: string | ArrayBuffer;
   profileImg?: string | ArrayBuffer;
   name: string;
+  firstname?: string;
   lastName?: string;
   fullName?: string;
+  cin?: string;
   number: string;
   phone?: string;
   age: number;
