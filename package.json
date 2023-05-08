@@ -12,6 +12,8 @@
     "@fullcalendar/daygrid": "5.11.3",
     "@fullcalendar/react": "5.11.2",
     "@south-paw/react-vector-maps": "3.2.0",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.1",
     "@types/dompurify": "^3.0.2",
     "@types/jest": "29.1.1",
     "@types/node": "18.7.23",

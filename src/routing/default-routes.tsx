@@ -2,7 +2,9 @@ import { IRoute } from '../interfaces/routing';
 
 import SettingsPage from '../pages/settings/Settings';
 
+
 import PatientsPage from '../pages/dashboards/patients/Patients';
+import DashboardDonorPage from '../pages/dashboards/dashboard/Dashboard-donor'
 import DashboardPage from '../pages/dashboards/dashboard/Dashboard';
 import AppointmentsPage from '../pages/dashboards/appointments/AppointmentsPage';
 import DoctorsPage from '../pages/dashboards/doctors/Doctors';
@@ -46,6 +48,11 @@ import FormValidationPage from '../pages/forms/FormValidationPage';
 import AntdIconsPage from '../pages/icons/AntdIconsPage';
 import IconsOptionsPage from '../pages/icons/IconsOptionsPage';
 import IcofontIconsPage from '../pages/icons/IcofontIconsPage';
+import PaymentsDonor from '../pages/dashboards/payments/PaymentsDonor';
+import Donormedications from '../pages/dashboards/Donormedications/Donormedications';
+import Donormaterials from '../pages/dashboards/Donormaterials/Donormaterials';
+import StripeContainer from '../pages/dashboards/payments/StripeContainner';
+
 
 export const defaultRoutes: IRoute[] = [
   {
@@ -59,6 +66,10 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'default-dashboard',
     component: DashboardPage
+  },
+  {
+    path: 'dashboard-donor',
+    component: DashboardDonorPage
   },
   {
     path: 'appointments',
@@ -139,6 +150,10 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'payments',
     component: Payments
+  },
+  {
+    path: 'PaymentsDonor',
+    component: StripeContainer
   },
   {
     path: 'departments',
@@ -223,6 +238,14 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'icons-options',
     component: IconsOptionsPage
+  },
+  {
+    path: 'Donormedications',
+    component: Donormedications
+  },
+  {
+    path: 'Donormaterials',
+    component: Donormaterials
   },
   {
     path: 'icofont-icons',

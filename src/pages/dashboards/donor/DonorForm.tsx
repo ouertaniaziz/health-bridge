@@ -48,7 +48,7 @@ const initialValues = {
   ]
 };
 
-const DoctorForm = ({ onSubmit, onCancel }: Props) => {
+const DonorForm = ({ onSubmit, onCancel }: Props) => {
   const { setFieldTouched, handleChange, handleBlur, values, setValues, isValid, errors, touched } =
     useFormik({
       initialValues,
@@ -147,4 +147,4 @@ const DoctorForm = ({ onSubmit, onCancel }: Props) => {
   );
 };
 
-export default DoctorForm;
+export default DonorForm;

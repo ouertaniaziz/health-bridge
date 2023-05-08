@@ -78,11 +78,9 @@ const App = () => {
         </PatientProvider>
       </Route>
       <Route path='/donor'>
-        <PatientProvider>
           <VerticalLayout>
-            <PatientRoutes layout='donor' />
+            <DonorRoutes layout='donor' />
           </VerticalLayout>
-        </PatientProvider>
       </Route>
 
 

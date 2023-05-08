@@ -56,8 +56,12 @@ const VerticalLayout = ({ children }: Props) => {
         setorientation('doctor');
 
         setMenuData(result.data);
-      }
-    }
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
+        const result = await axios('/data/menu-donor.json');
+        setorientation('donor');
+
+        setMenuData(result.data);
+    }}
 
     fetchMenuData().catch((err) => console.log('Server Error', err));
   }, []);
