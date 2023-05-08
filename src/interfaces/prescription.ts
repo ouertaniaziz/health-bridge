@@ -10,4 +10,6 @@ export interface IPrescription extends Document {
   verified: boolean;
   qrCodeVerif: string;
   traitement: Types.ObjectId[] | ITraitement[];
+  //new
+  Polyclinicstatus?: string;
 }

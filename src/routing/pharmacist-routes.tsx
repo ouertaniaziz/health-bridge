@@ -7,6 +7,7 @@ import PrescriptionPages from '../pages/dashboards/prescription/PrescriptionPage
 import Medications from '../layout/components/pharmacist/medications';
 import Profile from '../layout/components/pharmacist/profile';
 import pharmacists from '../layout/components/pharmacist/pharmacists';
+import PrescriptionPharmacist from '../layout/components/pharmacist/prescriptionspharmacist/Prescriptionspharmacist';
 export const pharmacistRoutes: IRoute[] = [
   // {
   //   path: 'settings',
@@ -37,8 +38,8 @@ export const pharmacistRoutes: IRoute[] = [
    { path: 'pharmacists',
    component: pharmacists },
 
-   { path: 'prescription',
-   component: PrescriptionPages}
+   { path: 'prescriptions',
+   component: PrescriptionPharmacist}
 
 
 ];
