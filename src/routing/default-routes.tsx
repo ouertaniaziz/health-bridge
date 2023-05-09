@@ -1,6 +1,7 @@
 import { IRoute } from '../interfaces/routing';
 
 import SettingsPage from '../pages/settings/Settings';
+import DashboardPolyclinic from '../pages/dashboards/dashboard/DashboardPolyclinic';
 
 import TraitementPage from '../pages/dashboards/traitments/TraitmentPages';
 import PrescriptionPolyclinicPage from '../pages/dashboards/prescription/PrescriptionPages';
@@ -242,5 +243,9 @@ export const defaultRoutes: IRoute[] = [
   {
     path: 'traitments',
     component: TraitementPage
+  },
+  {
+    path: 'polyclinic-dashboard',
+    component: DashboardPolyclinic
   }
 ];
