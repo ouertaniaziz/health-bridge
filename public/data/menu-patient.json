@@ -46,5 +46,11 @@
       "class": "icofont-calendar"
     },
     "routing": "events-calendar"
+  },{
+    "title":"Chatroom",
+    "icon":{
+      "class":"icofont icofont-chat"
+    },
+    "routing":"chatroom"
   }
 ]
