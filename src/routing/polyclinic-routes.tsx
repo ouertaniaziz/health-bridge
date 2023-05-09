@@ -10,7 +10,7 @@ import PrescriptionPolyclinic from '../layout/components/polyclinic/Prescription
 
 export const polyclinicRoutes: IRoute[] = [
   {
-    path: 'settings',
+    path: 'Settings',
     component: SettingsPage
   },
   {

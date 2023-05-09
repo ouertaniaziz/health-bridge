@@ -12,7 +12,6 @@ const columns: ColumnProps<IPrescription>[] = [
     key: 'name',
     dataIndex: 'doctor',
     title: 'Doctor Name',
-    //sorter: (a, b) => (a.medicationName > b.medicationName ? 1 : -1),
     render: (doctor) => (
       <strong>
         {doctor.firstname + ' '}
@@ -24,7 +23,6 @@ const columns: ColumnProps<IPrescription>[] = [
     key: 'patient',
     dataIndex: 'patient',
     title: 'Patient ',
-    //sorter: (a, b) => (a.dosageForm > b.dosageForm ? 1 : -1),
     render: (patient) => (
       <span className='nowrap' style={{ color: '#336cfb' }}>
         {patient.firstname}
@@ -36,7 +34,6 @@ const columns: ColumnProps<IPrescription>[] = [
     key: 'traitement',
     dataIndex: 'traitement',
     title: 'Traitements',
-    //sorter: (a, b) => (a.dosageStrength > b.dosageStrength ? 1 : -1),
     render: (traitement) => (
       <span className='nowrap' style={{ color: '#336cfb' }}>
         {traitement.length} Traitements
@@ -48,7 +45,6 @@ const columns: ColumnProps<IPrescription>[] = [
     key: 'date',
     dataIndex: 'date',
     title: 'Date of Creation',
-    //sorter: (a, b) => (a.dosageStrength > b.dosageStrength ? 1 : -1),
     render: (date) => (
       <span className='nowrap' style={{ color: '#336cfb' }}>
         {date.slice(0, 10)}

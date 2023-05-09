@@ -59,14 +59,14 @@ const PrescriptionPolyclinic = () => {
     }
 
     setselectedp(Prescription);
-    //console.log(selectedp);
+    
   };
   const handleselecdeclined = (Prescription: IPrescription) => {
     if (open === false) {
       setOpendecline(true);
     }
     setselectedp(Prescription);
-    //console.log(selectedp);
+   
   };
   const handleOK = () => {
     axiosInstance
@@ -74,13 +74,10 @@ const PrescriptionPolyclinic = () => {
       .then((res) => {
         Notificationwithsuccess('success', 'Approval');
         console.log('approved triggered');
-        //setselectedp(null);
-        //setOpen(false);
       })
       .catch((error) => {
         console.log(error.message);
         Notificationwithfail('error');
-        //setOpen(false);
       });
   };
   const handledeclined = () => {
@@ -88,17 +85,15 @@ const PrescriptionPolyclinic = () => {
       .post('/polyclinics/declineprescription', { _id: selectedp._id })
       .then((res) => {
         Notificationwithsuccess('success', 'Decline');
-        //setOpendecline(false);
-        //setselectedp(null);
+       
       })
       .catch((error) => {
         Notificationwithfail('error');
-        //setOpendecline(false);
         console.log(error.message);
       });
   };
 
-  //const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
+
 
   usePageData(pageData);
 
