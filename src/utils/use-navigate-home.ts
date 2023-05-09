@@ -13,7 +13,7 @@ export function useNavigateDoctor() {
 
 export function useNavigatePatient() {
   const history = useHistory();
-  return useCallback(() => history.replace('/patient/default-dashboard'), []);
+  return useCallback(() => history.replace('/patient/Patient-dashboard'), []);
 }
 export function useNavigatePrescription(id) {
   const history = useHistory();

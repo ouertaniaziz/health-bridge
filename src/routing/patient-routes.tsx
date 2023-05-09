@@ -9,7 +9,10 @@ import PrescriptionsPatient from '../pages/medic/PrescriptionsPatient';
 import EditPatient from '../layout/components/Patientoffice/EditPatient';
 import DoctorsPage from '../pages/dashboards/doctors/Doctors';
 import AppoimentsDoctorCalenda from '../pages/services/AppoimentsDoctorCalenda';
+import PatientDashboard from '../layout/components/Patientoffice/dashboard/Dashboard';
 import AppoimentsPatientCalendar from '../pages/services/AppoimentsPatientCalendar';
+import Posts from '../layout/components/Blogs/frontpage';
+import Chatroom from '../layout/components/chatroompatients/Chatroom';
 export const patientRoutes: IRoute[] = [
   {
     path: 'settings',
@@ -20,8 +23,8 @@ export const patientRoutes: IRoute[] = [
     component: PatientsPage
   },
   {
-    path: 'default-dashboard',
-    component: DashboardPage
+    path: 'Patient-dashboard',
+    component: PatientDashboard
   },
 
   {
@@ -47,5 +50,13 @@ export const patientRoutes: IRoute[] = [
   {
     path: 'allAppoiments',
     component: AppoimentsPatientCalendar
+  },
+  {
+    path: 'blogs',
+    component: Posts
+  },
+  {
+    path: 'chatroom',
+    component: Chatroom
   }
 ];
