@@ -77,7 +77,7 @@ const AccountForm = ({ user }) => {
           user
         })
         .then((response) => {
-          openNotificationWithIcon('success');
+          openNotificationWithIconsucc('success');
 
         })
         .catch((error) => {

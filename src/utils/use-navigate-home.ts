@@ -8,7 +8,6 @@ export function useNavigateHome() {
 }
 export function useNavigateDoctor() {
   const history = useHistory();
-  console.log(history, 'tessssgghhhhhh');
   return useCallback(() => history.replace('/doctor/default-dashboard'), []);
 }
 

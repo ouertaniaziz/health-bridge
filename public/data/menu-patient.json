@@ -20,13 +20,6 @@
   },
 
   {
-    "title": "Appointments",
-    "icon": {
-      "class": "icofont-stethoscope-alt"
-    },
-    "routing": "appointments"
-  },
-  {
     "title": "prescription ",
     "icon": {
       "class": "icofont-ui-settings"
@@ -41,16 +34,17 @@
     "routing": "doctors"
   },
   {
-    "title": "Events calendar",
+    "title": "Appointments",
     "icon": {
       "class": "icofont-calendar"
     },
-    "routing": "events-calendar"
-  },{
-    "title":"Chatroom",
-    "icon":{
-      "class":"icofont icofont-chat"
+    "routing": "allAppoiments"
+  },
+  {
+    "title": "Chatroom",
+    "icon": {
+      "class": "icofont icofont-chat"
     },
-    "routing":"chatroom"
+    "routing": "chatroom"
   }
 ]

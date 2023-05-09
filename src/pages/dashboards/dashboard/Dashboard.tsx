@@ -34,7 +34,7 @@ const pageData: IPageData = {
 };
 
 const DashboardPage = () => {
-  const [appointments] = useFetchPageData<IAppointment[]>('./data/last-appointments.json', []);
+  // const [appointments] = axios<IAppointment[]>('./data/last-appointments.json', []);
   usePageData(pageData);
 
   return (
@@ -172,9 +172,9 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <Card title='Last appointments' className='mb-0'>
+      {/* <Card title='Last appointments' className='mb-0'>
         <AppointmentsTable data={appointments} />
-      </Card>
+  </Card>*/}
     </>
   );
 };

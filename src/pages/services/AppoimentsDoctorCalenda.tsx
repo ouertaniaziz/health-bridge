@@ -80,14 +80,6 @@ const AppoimentsDoctorCalenda = () => {
   }, [events]);
 
   console.log(events, 'hetttttttt');
-  const setDate = (day: number, hour: number = 0) => {
-    const date = new Date();
-
-    date.setDate(date.getDate() + day);
-    date.setHours(date.getHours() + hour);
-
-    return date;
-  };
 
   const closeModal = () => setModalVisibility(false);
 

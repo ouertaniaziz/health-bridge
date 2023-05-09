@@ -1,41 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Badge, Button, Dropdown, Menu } from 'antd';
+import { Badge, Button, Dropdown, Menu, notification } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { INotification } from '../../../interfaces/notification';
+import { io } from 'socket.io-client';
 
-const defaultNotifications = [
-  {
-    text: 'Sara Crouch liked your photo',
-    icon: 'icofont-heart',
-    time: '17 minutes ago'
-  },
-  {
-    text: 'New user registered',
-    icon: 'icofont-users-alt-6',
-    time: '23 minutes ago'
-  },
-  {
-    text: 'Amanda Lie shared your post',
-    icon: 'icofont-share',
-    time: '25 minutes ago'
-  },
-  {
-    text: 'New user registered',
-    icon: 'icofont-users-alt-6',
-    time: '32 minutes ago'
-  },
-  {
-    text: 'You have a new message',
-    icon: 'icofont-ui-message',
-    time: '58 minutes ago'
-  }
-];
+const defaultNotifications = [];
 
 type Props = {
   data?: INotification[];
 };
 
 const homeRoute = 'vertical/default-dashboard';
+const socket = io('http://localhost:3000');
 
 const Notifications = ({ data = defaultNotifications }: Props) => {
   const [notifications, setNotifications] = useState<INotification[]>([]);
@@ -44,6 +20,30 @@ const Notifications = ({ data = defaultNotifications }: Props) => {
   useEffect(() => {
     setNotifications(data);
   }, [data]);
+  useEffect(() => {
+    socket.on('notification', (notif) => {
+      const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
+      const newNotification = {
+        text: notif.patient + 'want to have a rdv',
+        icon: 'icofont-tasks-alt',
+        time: notif.time
+      };
+      if (notif.id === doctorId)
+        notification.open({
+          message: 'Notification Title',
+          description:
+            'new patient has booked an appointment with you. The patientname is' +
+            notif.patient +
+            'and the date and time of their appointment are scheduled for  ' +
+            notif.time +
+            '. If you require any further information about the patient or their medical condition, please do not hesitate to contact me.',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          }
+        });
+      setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
+    });
+  }, [socket]);
 
   const handleClearAll = (e) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const Notifications = ({ data = defaultNotifications }: Props) => {
       <Menu.Item className='dropdown-header' key='header-item'>
         <h3 className='dropdown-title'>Notifications</h3>
 
-        <a href="#" onClick={handleClearAll} className='text-danger'>
+        <a href='#' onClick={handleClearAll} className='text-danger'>
           Clear all
         </a>
       </Menu.Item>
@@ -73,18 +73,13 @@ const Notifications = ({ data = defaultNotifications }: Props) => {
           </Menu.Item>
         ))}
 
-      {!notifications.length && (
-        <Menu.Item className='empty-item'>No notifications</Menu.Item>
-      )}
+      {!notifications.length && <Menu.Item className='empty-item'>No notifications</Menu.Item>}
 
       {notifications.length > 0 && (
         <Menu.Item className='dropdown-actions' key='actions-item'>
           <Button type='primary' className='w-100'>
             View all notifications
-            <span
-              style={{ fontSize: '1.2rem' }}
-              className='icofont-calendar ml-3'
-            />
+            <span style={{ fontSize: '1.2rem' }} className='icofont-calendar ml-3' />
           </Button>
         </Menu.Item>
       )}
@@ -101,9 +96,7 @@ const Notifications = ({ data = defaultNotifications }: Props) => {
     >
       <Badge className='action-badge' count={notifications.length}>
         <span
-          className={`notification-icon icofont-notification ${
-            visible ? 'active' : null
-          }`}
+          className={`notification-icon icofont-notification ${visible ? 'active' : null}`}
           style={{ fontSize: '22px', cursor: 'pointer' }}
         />
       </Badge>
