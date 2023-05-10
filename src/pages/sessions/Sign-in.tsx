@@ -12,6 +12,7 @@ import {
   useNavigateDoctor,
   useNavigateHome,
   useNavigatePatient,
+  useNavigateDonor,
   useNavigatePolyclinic
 } from '../../utils/use-navigate-home';
 import authService from '../../redux/login/auth.Service';
@@ -30,6 +31,7 @@ const SignIn = () => {
   const navigateHome = useNavigateHome();
   const navigateDoctor = useNavigateDoctor();
   const navigatePatient = useNavigatePatient();
+  const NavigateDonor = useNavigateDonor();
   const navigatePolyclinic = useNavigatePolyclinic();
   const dispatch = useDispatch();
 
@@ -48,6 +50,9 @@ const SignIn = () => {
                 navigatePatient();
               } else if (currentUser.role.includes('pharmacist')) {
                 console.log('first');
+              } else if (currentUser.role.includes('donor')) {
+                console.log('first');
+                NavigateDonor();
               } else if (currentUser.role.includes('adminpolyclinic')) {
                 navigatePolyclinic();
               }

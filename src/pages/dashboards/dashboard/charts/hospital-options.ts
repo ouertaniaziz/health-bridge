@@ -7,7 +7,7 @@ export default {
     }
   },
   legend: {
-    data: ['patients 2018', 'patients 2019']
+    data: ['donors 2022', 'donorss 2023']
   },
   grid: {
     left: 30,
@@ -31,24 +31,24 @@ export default {
         label: {
           formatter: function(params) {
             return (
-              'patients ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+              'donors ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
             );
           }
         }
       },
       data: [
-        '2019-1',
-        '2019-2',
-        '2019-3',
-        '2019-4',
-        '2019-5',
-        '2019-6',
-        '2019-7',
-        '2019-8',
-        '2019-9',
-        '2019-10',
-        '2019-11',
-        '2019-12'
+        '2023-1',
+        '2023-2',
+        '2023-3',
+        '2023-4',
+        '2023-5',
+        '2023-6',
+        '2023-7',
+        '2023-8',
+        '2023-9',
+        '2023-10',
+        '2023-11',
+        '2023-12'
       ]
     },
     {
@@ -66,24 +66,24 @@ export default {
         label: {
           formatter: function(params) {
             return (
-              'patients ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+              'donors ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
             );
           }
         }
       },
       data: [
-        '2018-1',
-        '2018-2',
-        '2018-3',
-        '2018-4',
-        '2018-5',
-        '2018-6',
-        '2018-7',
-        '2018-8',
-        '2018-9',
-        '2018-10',
-        '2018-11',
-        '2018-12'
+        '2022-1',
+        '2022-2',
+        '2022-3',
+        '2022-4',
+        '2022-5',
+        '2022-6',
+        '2022-7',
+        '2022-8',
+        '2022-9',
+        '2022-10',
+        '2022-11',
+        '2022-12'
       ]
     }
   ],
