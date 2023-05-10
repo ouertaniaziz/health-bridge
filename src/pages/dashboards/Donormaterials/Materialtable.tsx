@@ -17,7 +17,8 @@ type Props = {
   data: IMaterial[];
   actions?: (material: IMaterial) => ReactNode;
   openit:boolean;
-  selected:IMaterial
+  selected:IMaterial,
+  cancelit:()=>void
 };
 //////////////////////Form
 const  materialSchema = Yup.object().shape({
@@ -43,7 +44,7 @@ const defaultSubmitText = 'Edit Material';
 
 
 //////////////////
-const MaterialTable = ({ data, actions ,openit,selected}: Props) => {
+const MaterialTable = ({ data, actions ,openit,selected,cancelit}: Props) => {
 useEffect(()=>{
   console.log('lena',selected)
 },[selected])
@@ -86,10 +87,12 @@ useEffect(()=>{
     .then((response) => {
       // Gérer la réponse du serveur
       console.log(response.data);
+      cancelit()
     })
     .catch((error) => {
       // Gérer les erreurs
       console.log(error);
+      cancelit()
     });
     
   }
@@ -98,7 +101,7 @@ useEffect(()=>{
     const hasError = hasErrorFactory(touched, errors);
   
     const handleClose = () => {
-      onClose();
+      cancelit();
     };
   
     return (
@@ -164,7 +167,7 @@ useEffect(()=>{
           </Button>
   
           <Button htmlType='submit'  type='primary'  onClick={() => handlesubmitdonation(values)}>
-            Add
+            Edit
           </Button>
         </div>
       </>

@@ -11,6 +11,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { hasErrorFactory } from '../../../utils/hasError';
 import Item from 'antd/es/list/Item';
+import axiosInstance from '../../../config/axios';
 //FOrm///////////////////
 
 
@@ -48,10 +49,16 @@ const handleopen=(medication:IMedicationModel)=>{
     setDeletingMedication(null);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async (medication) => {
+    console.log(deletingMedication)
     if (deletingMedication) {
-      //handleDelete(deletingMedication);
-      setDeletingMedication(null);
+      try {
+       const response = await axiosInstance.delete(`/donation/medication/${deletingMedication._id}`);
+        //console.log(response.data);       
+         setDeletingMedication(null);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -61,11 +68,13 @@ const handleopen=(medication:IMedicationModel)=>{
         title='Are you sure you want to delete this medication?'
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
+        
        // visible={!!deletingMedication && deletingMedication._id === medication._id}
       >
         <Button
-          onClick={() => {
+          onClick={(medcation) => {
             setDeletingMedication(medication);
+           // console.log(medication)
           }}
           shape='circle'
           danger
@@ -77,13 +86,14 @@ const handleopen=(medication:IMedicationModel)=>{
         <Button
 
           shape='circle'
-          danger
+          className="ant-btn css-dev-only-do-not-override-yp8pcc ant-btn-circle ant-btn-primary"
+
           onClick={()=>{
             handleopen(medication)
           }}
         >
         
-          <span className='icofont icofont-ui-add' />
+          <span className='icofont icofont-edit-alt' />
         </Button>
       
     </div>
@@ -91,10 +101,13 @@ const handleopen=(medication:IMedicationModel)=>{
 
   usePageData(pageData);
   const onEditPatient = () => null
+  const cancelmodal=()=>{
+    setmodal(false);
+  }
 
   return (
     <>
-      <Medicationtable data={medications} actions={medicationActions} openit={openmodal} selected={selecteddonation} />
+      <Medicationtable data={medications} actions={medicationActions} openit={openmodal} selected={selecteddonation} cancelit={cancelmodal}/>
      
        
       <Popconfirm

@@ -11,6 +11,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { hasErrorFactory } from '../../../utils/hasError';
 import Item from 'antd/es/list/Item';
+import axiosInstance from '../../../config/axios';
 //FOrm///////////////////
 
 
@@ -47,10 +48,16 @@ const handleopen=(material:IMaterial)=>{
     setDeletingMaterial(null);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async (material) => {
+    console.log(deletingMaterial)
     if (deletingMaterial) {
-      //handleDelete(deletingMedication);
-      setDeletingMaterial(null);
+      try {
+       const response = await axiosInstance.delete(`/donation/material/${deletingMaterial._id}`);
+        //console.log(response.data);       
+         setDeletingMaterial(null);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -76,13 +83,14 @@ const handleopen=(material:IMaterial)=>{
         <Button
 
           shape='circle'
-          danger
+          className="ant-btn css-dev-only-do-not-override-yp8pcc ant-btn-circle ant-btn-primary"
+
           onClick={()=>{
             handleopen(material)
           }}
         >
         
-          <span className='icofont icofont-ui-add' />
+          <span className='icofont icofont-edit-alt' />
         </Button>
       
     </div>
@@ -90,37 +98,17 @@ const handleopen=(material:IMaterial)=>{
 
   usePageData(pageData);
   const onEditPatient = () => null
-
+const cancelmodal=()=>{
+  setmodal(false);
+}
   return (
     <>
-      <Materialtable data={materials} actions={materialActions} openit={openmodal} selected={selecteddonation} />
+      <Materialtable data={materials} actions={materialActions} openit={openmodal} selected={selecteddonation}  cancelit={cancelmodal}/>
      
        
 
         
-        {/* <PatientForm
-          submitText='Update patient'
-          onCancel={closeModal}
-          onSubmit={onEditPatient}
-          patient={patient}
-        /> */}
-        {/* <Form 
-        submitText='Update patient'
-          //onCancel={()=>setmodal(false)}
-          //onSubmit={onEditPatient}
-
-          medication={selecteddonation}>
-
-        </MedicationForm> */}
-      {/* </Modal>
-      <PageAction
-        icon='icofont-plus'
-        type={'primary'}
-        onClick={() => {
-          // add code for adding a new medication here
-        }}
-      /> */}
-
+      
       <Popconfirm
         title='Are you sure you want to delete this medication?'
         onConfirm={handleConfirmDelete}

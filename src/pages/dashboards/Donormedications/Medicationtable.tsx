@@ -18,6 +18,7 @@ type Props = {
   actions?: (medication: IMedicationModel) => ReactNode;
   openit:boolean;
   selected:IMedicationModel,
+  cancelit:  ()=>void
   
 };
 //////////////////////Form
@@ -46,7 +47,7 @@ const defaultSubmitText = 'Add Medication';
 
 
 //////////////////
-const MedicationTable = ({ data, actions ,openit,selected}: Props) => {
+const MedicationTable = ({ data, actions ,openit,selected,cancelit}: Props) => {
 useEffect(()=>{
   console.log('lena',selected)
 },[selected])
@@ -91,6 +92,8 @@ useEffect(()=>{
     .then((response) => {
       // Gérer la réponse du serveur
       console.log(response.data);
+      cancelit()
+      
     })
     .catch((error) => {
       // Gérer les erreurs
@@ -103,7 +106,7 @@ useEffect(()=>{
     const hasError = hasErrorFactory(touched, errors);
   
     const handleClose = () => {
-      onClose();
+      cancelit();
     };
   
     return (
@@ -195,7 +198,7 @@ useEffect(()=>{
           </Button>
   
           <Button htmlType='submit'  type='primary'  onClick={() => handlesubmitdonation(values)}>
-            Add
+          Edit
           </Button>
         </div>
       </>

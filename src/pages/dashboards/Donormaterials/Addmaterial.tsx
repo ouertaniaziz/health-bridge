@@ -57,12 +57,7 @@ const AddMaterialForm = ({ onSubmit, onClose }) => {
         materialname: '',
         quantity: 0,
         state: '',
-       
     },
-   
-   
-
-
     initialErrors: { empty: null },
     validationSchema: materialScheme,
     onSubmit: (values) => {
@@ -71,8 +66,6 @@ const AddMaterialForm = ({ onSubmit, onClose }) => {
         materialname: values.materialname,
         quantity: values.quantity,
         state: values.state,
-       
-       
        }
      handleAdd(material);
       onSubmit(values);

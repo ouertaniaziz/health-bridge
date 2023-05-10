@@ -12,6 +12,7 @@ type Props = {
   onCancel: () => void;
   submitText?: string;
   material:IMaterial
+  
 };
 
 const defaultSubmitText = 'Add Medication';

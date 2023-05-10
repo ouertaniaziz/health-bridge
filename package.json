@@ -11,6 +11,7 @@
     "@emotion/styled": "^11.10.8",
     "@fullcalendar/daygrid": "5.11.3",
     "@fullcalendar/react": "5.11.2",
+    "@mui/material": "^5.12.3",
     "@south-paw/react-vector-maps": "3.2.0",
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.52.1",

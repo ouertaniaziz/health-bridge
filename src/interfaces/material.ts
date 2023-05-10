@@ -2,7 +2,8 @@ import mongoose, { Document, Schema } from "mongoose";
 import { IDonor } from "./donor";
 
 export interface IMaterial  {
-  donor?: IDonor["_id"];
+  _id?:string,
+  donor?: IDonor;  
   materialname?: string;
   quantity?: number;
   state?: string;

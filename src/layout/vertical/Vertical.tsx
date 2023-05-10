@@ -104,7 +104,7 @@ const VerticalLayout = ({ children }: Props) => {
         data={menuData}
       />
 
-      <AddPatient />
+      {/* <AddPatient /> */}
 
       <Menu className='assistant-menu' orientation='vertical'>
         <NavLink className='link' to='/vertical/settings' activeClassName='active' replace>
