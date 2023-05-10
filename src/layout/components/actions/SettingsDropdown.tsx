@@ -13,14 +13,42 @@ const accountItems = [
 const SettingsDropdown = () => {
   const accountMenu = (
     <Menu style={{ minWidth: '180px' }}>
-      {accountItems.map((item, index) => (
-        <Menu.Item className='action-item' key={index}>
-          <NavLink className='d-flex w-100' to={item.route} replace>
-            <span className={`icon mr-3 ${item.icon}`} />
-            <span className='text'>{item.text}</span>
-          </NavLink>
-        </Menu.Item>
-      ))}
+      <Menu.Item className='action-item' key={0}>
+        <NavLink className='d-flex w-100' to={'/vertical/edit-account'} replace>
+          <span className={`icon mr-3 icofont-ui-home`} />
+          <span className='text'>Edit account</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item className='action-item' key={1}>
+        <NavLink className='d-flex w-100' to={'/vertical/user-profile'} replace>
+          <span className={`icon mr-3 icofont-ui-user`} />
+          <span className='text'>User profile</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item className='action-item' key={2}>
+        <NavLink className='d-flex w-100' to={'/vertical/events-calendar'} replace>
+          <span className={`icon mr-3 icofont-ui-calendar`} />
+          <span className='text'>Calendar</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item className='action-item' key={3}>
+        <NavLink className='d-flex w-100' to={'/vertical/settings'} replace>
+          <span className={`icon mr-3 icofont-ui-settings`} />
+          <span className='text'>Settings</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item
+        className='action-item'
+        key={4}
+        onClick={() => {
+          localStorage.removeItem('user');
+        }}
+      >
+        <NavLink className='d-flex w-100' to={'/public/sign-in'} replace>
+          <span className={`icon mr-3 icofont-logout`} />
+          <span className='text'>Log Out</span>
+        </NavLink>
+      </Menu.Item>
     </Menu>
   );
 
