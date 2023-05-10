@@ -7,7 +7,7 @@ export interface IDoctor {
   aboutMe?: string;
   name?: string;
   password?: string;
-  speciality?: 'Carcinologist' | 'cardiologist' | 'Psychiatrist';
+  speciality?: 'Carcinologist' | 'cardiologist' | 'Psychiatrist'|'carcino'|'psychiatrist';
   patients?: IPatient[];
   adminpolyclinic?: IAdminPolyclinic[];
 }
