@@ -9,5 +9,7 @@ export interface IPrescription extends Document {
   date?: Date;
   verified?: boolean;
   qrCodeVerif?: string;
+  Polyclinicstatus?: string;
+
   traitement?: Types.ObjectId[] | ITraitement[];
 }

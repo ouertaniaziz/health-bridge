@@ -42,6 +42,7 @@ const SettingsDropdown = () => {
         key={4}
         onClick={() => {
           localStorage.removeItem('user');
+          localStorage.removeItem('token');
         }}
       >
         <NavLink className='d-flex w-100' to={'/public/sign-in'} replace>
