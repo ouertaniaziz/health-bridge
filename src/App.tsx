@@ -6,7 +6,7 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes } from './routing';
+import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes, polyclinicRoutes } from './routing';
 
 import './App.less';
 import './App.scss';
@@ -34,12 +34,15 @@ const Routes = ({ routes, layout = '' }) => (
 const DefaultRoutes = ({ layout }) => <Routes routes={defaultRoutes} layout={layout} />;
 const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layout} />;
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
+const PolyclinicRoutes = ({ layout }) => <Routes routes={polyclinicRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
   const [doctor, setdoctor] = useState(false);
   const [patient, setpatient] = useState(false);
+  const [polyclinic, setpolyclinic] = useState(true);
+
   const [NotLogged, setNotLogged] = useState(false);
 
   useEffect(() => {
@@ -49,6 +52,8 @@ const App = () => {
         setpatient(true);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
         setdoctor(true);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        setpolyclinic(false);
       } else setNotLogged(true);
     }
   }, [localStorage]);
@@ -63,21 +68,25 @@ const App = () => {
       <Route path='/doctor'>
         <VerticalLayout>
           <Chatgptmodal />
-            <DoctorRoutes layout='doctor' />
-        
+          <DoctorRoutes layout='doctor' />
         </VerticalLayout>
       </Route>
 
       <Route path='/patient'>
         <PatientProvider>
           <VerticalLayout>
-          <Chatgptmodal />
+            <Chatgptmodal />
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
       </Route>
+      <Route path='/polyclinic'>
+        <VerticalLayout>
+          <PolyclinicRoutes layout='polyclinic' />
+        </VerticalLayout>
+      </Route>
 
-      {(doctor || patient || !localStorage.getItem('user')) && (
+      {(doctor || patient ||  !localStorage.getItem('user')) && (
         <Route path='/'>
           {doctor ? (
             <Redirect to='/doctor/settings' />
