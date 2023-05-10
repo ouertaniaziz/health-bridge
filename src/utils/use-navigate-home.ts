@@ -19,3 +19,8 @@ export function useNavigatePrescription(id) {
   const history = useHistory();
   return useCallback(() => history.replace(), []);
 }
+
+export function useNavigatePolyclinic() {
+  const history = useHistory();
+  return useCallback(() => history.replace('/patient/Patient-dashboard'), []);
+}

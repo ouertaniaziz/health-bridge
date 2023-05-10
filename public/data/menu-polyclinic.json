@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Polyclinic",
+    "groupTitle": true
+  },
+  {
+    "title": "Dashboard",
+    "icon": {
+      "class": "icofont-thermometer-alt"
+    },
+    "routing": "default-dashboard"
+  },
+  {
+    "title": "Doctors",
+    "icon": {
+      "class": "icofont-doctor"
+    },
+    "routing": "doctor"
+  },
+  {
+    "title": "Patients",
+    "icon": {
+      "class": "icofont-patient-file"
+    },
+    "routing": "patients"
+  },
+  {
+    "title": "Precriptions",
+    "icon": {
+      "class": "icofont-prescription"
+    },
+    "routing": "prescription"
+  },
+  {
+    "title": "Traitments",
+    "icon": {
+      "class": "icofont-ambulance-crescent"
+    },
+    "routing": "traitments"
+  }
+]
