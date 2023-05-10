@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Card } from 'antd';
 
@@ -34,7 +34,7 @@ const pageData: IPageData = {
 };
 
 const DashboardPage = () => {
-  const [appointments] = useFetchPageData<IAppointment[]>('./data/last-appointments.json', []);
+  // const [appointments] = axios<IAppointment[]>('./data/last-appointments.json', []);
   usePageData(pageData);
 
   return (
@@ -158,7 +158,10 @@ const DashboardPage = () => {
 
         <div className='col-12 col-md-4'>
           <Card title={'patients gender'}>
-            <ReactEcharts className='chart-container container-h-300' option={patientsGenderOptions} />
+            <ReactEcharts
+              className='chart-container container-h-300'
+              option={patientsGenderOptions}
+            />
           </Card>
         </div>
 
@@ -169,9 +172,9 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <Card title='Last appointments' className='mb-0'>
+      {/* <Card title='Last appointments' className='mb-0'>
         <AppointmentsTable data={appointments} />
-      </Card>
+  </Card>*/}
     </>
   );
 };

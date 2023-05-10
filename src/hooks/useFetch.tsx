@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 export function useFetch<T>(
   url: string,
@@ -10,7 +11,7 @@ export function useFetch<T>(
   const [data, setData] = useState<T>(initialState);
 
   async function getData() {
-    const result = await axios.get(url);
+    const result = await axiosInstance.get(url);
     return result.data;
   }
 

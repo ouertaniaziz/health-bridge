@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Button } from 'antd';
 import { HomeFilled } from '@ant-design/icons/lib';
 
 import BaseErrorPage from './BaseErrorPage';
 import { useNavigateHome } from '../../utils/use-navigate-home';
+import { useHistory } from 'react-router-dom';
 
 const NotFound = () => {
   const navigateHome = useNavigateHome();
+  const [doctor, setdoctor] = useState(false);
+  const [patient, setpatient] = useState(false);
+  const [NotLogged, setNotLogged] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(localStorage.getItem('user'), 'test');
+    if (localStorage.getItem('user')) {
+      if (JSON.parse(localStorage.getItem('user')).role === 'patient') {
+        setpatient(true);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
+        setdoctor(true);
+      } else setNotLogged(true);
+    }
+  }, [localStorage]);
   return (
     <BaseErrorPage
       subTitle={
@@ -17,7 +33,17 @@ const NotFound = () => {
       action={
         <Button
           type='primary'
-          onClick={navigateHome}
+          onClick={() => {
+            if (doctor || patient || !localStorage.getItem('user')) {
+              if (doctor) {
+                history.replace(`/doctor/default-dashboard`);
+              } else if (patient) {
+                history.replace(`/patient/Patient-dashboard`);
+              } else {
+                history.replace(`/`);
+              }
+            }
+          }}
           style={{ width: 'auto' }}
           icon={<HomeFilled className='ml-0 mr-2' style={{ fontSize: '1em' }} />}
         >

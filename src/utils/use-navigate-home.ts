@@ -8,13 +8,12 @@ export function useNavigateHome() {
 }
 export function useNavigateDoctor() {
   const history = useHistory();
-  console.log(history, 'tessssgghhhhhh');
   return useCallback(() => history.replace('/doctor/default-dashboard'), []);
 }
 
 export function useNavigatePatient() {
   const history = useHistory();
-  return useCallback(() => history.replace('/patient/default-dashboard'), []);
+  return useCallback(() => history.replace('/patient/Patient-dashboard'), []);
 }
 
 export function useNavigateDonor() {
@@ -25,4 +24,9 @@ export function useNavigateDonor() {
 export function useNavigatePrescription(id) {
   const history = useHistory();
   return useCallback(() => history.replace(), []);
+}
+
+export function useNavigatePolyclinic() {
+  const history = useHistory();
+  return useCallback(() => history.replace('/patient/Patient-dashboard'), []);
 }

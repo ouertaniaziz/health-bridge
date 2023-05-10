@@ -47,7 +47,7 @@ export interface IUser {
   city?: string;
   postal_code?: number;
   state?: string;
-  img?: string | ArrayBuffer;
+  img?: string;
 }
 export interface IUserLink {
   icon: string;

@@ -6,12 +6,13 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes ,donorRoutes} from './routing';
+import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes, polyclinicRoutes ,donorRoutes} from './routing';
 
 import './App.less';
 import './App.scss';
 import { useHideLoader } from './hooks/useHideLoader';
 import { PatientProvider } from './layout/components/Patientoffice/provider/PatientProvider';
+import Chatgptmodal from './layout/components/Patientoffice/chatgptmodal';
 
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
@@ -34,28 +35,35 @@ const DefaultRoutes = ({ layout }) => <Routes routes={defaultRoutes} layout={lay
 const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layout} />;
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
 const DonorRoutes = ({ layout }) => <Routes routes={donorRoutes} layout={layout} />;
+const PolyclinicRoutes = ({ layout }) => <Routes routes={polyclinicRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
-  const [doctor, setdoctor] = useState(true);
-  const [patient, setpatient] = useState(true);
+  const [doctor, setdoctor] = useState(false);
+  const [patient, setpatient] = useState(false);
+  const [polyclinic, setpolyclinic] = useState(true);
   const [donor, setdonor] = useState(true);
   
 
+  const [NotLogged, setNotLogged] = useState(false);
+
   useEffect(() => {
+    console.log(localStorage.getItem('user'), 'test');
     if (localStorage.getItem('user')) {
       if (JSON.parse(localStorage.getItem('user')).role === 'patient') {
-        setpatient(false);
+        setpatient(true);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
-        setdoctor(false);
-      }
-      else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
+        setdoctor(true);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        setpolyclinic(false);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
         setdonor(false);
-      }
+      } else setNotLogged(true);
+     
       
     }
-  }, []);
+  }, [localStorage]);
 
   useHideLoader();
   return (
@@ -66,6 +74,7 @@ const App = () => {
 
       <Route path='/doctor'>
         <VerticalLayout>
+          <Chatgptmodal />
           <DoctorRoutes layout='doctor' />
         </VerticalLayout>
       </Route>
@@ -73,6 +82,7 @@ const App = () => {
       <Route path='/patient'>
         <PatientProvider>
           <VerticalLayout>
+            <Chatgptmodal />
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
@@ -83,10 +93,23 @@ const App = () => {
           </VerticalLayout>
       </Route>
 
-
-      <Route path='/' exact>
-        <Redirect to='/public/sign-in' />
+      <Route path='/polyclinic'>
+        <VerticalLayout>
+          <PolyclinicRoutes layout='polyclinic' />
+        </VerticalLayout>
       </Route>
+
+      {(doctor || patient ||  !localStorage.getItem('user')) && (
+        <Route path='/'>
+          {doctor ? (
+            <Redirect to='/doctor/settings' />
+          ) : patient ? (
+            <Redirect to='/patient/dashboard' />
+          ) : (
+            <Redirect to='/public/sign-in' />
+          )}
+        </Route>
+      )}
       <Route path='/vertical'>
         <VerticalLayout>
           <DefaultRoutes layout='vertical' />

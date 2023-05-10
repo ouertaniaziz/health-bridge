@@ -11,7 +11,7 @@ import DoctorsPage from '../pages/dashboards/doctors/Doctors';
 import AlertsPage from '../pages/components/AlertsPage';
 import AutocompletePage from '../pages/components/AutocompletePage';
 import BadgesPage from '../pages/components/BadgesPage';
-import ContactsPage from '../pages/components/ContactsPage';
+//import ContactsPage from '../pages/components/ContactsPage';
 import InputsPage from '../pages/components/InputsPage';
 import RatingPage from '../pages/components/RatingsPage';
 import ModalsPage from '../pages/components/ModalsPage';
@@ -95,10 +95,10 @@ export const defaultRoutes: IRoute[] = [
     path: 'badges',
     component: BadgesPage
   },
-  {
-    path: 'contacts',
-    component: ContactsPage
-  },
+  // {
+  //   path: 'contacts',
+  //   component: ContactsPage
+  // },
   {
     path: 'inputs',
     component: InputsPage

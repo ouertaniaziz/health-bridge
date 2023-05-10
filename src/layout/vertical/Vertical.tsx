@@ -25,14 +25,11 @@ import { IAppState } from '../../interfaces/app-state';
 import './Vertical.scss';
 import { useHideLoader } from '../../hooks/useHideLoader';
 
-
 type Props = {
   children: any;
 };
 
 const VerticalLayout = ({ children }: Props) => {
-
-
   const dispatch = useDispatch();
 
   const settings = useSelector((state: IAppState) => state.settings);
@@ -56,10 +53,14 @@ const VerticalLayout = ({ children }: Props) => {
         setorientation('doctor');
 
         setMenuData(result.data);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        const result = await axios('/data/menu-polyclinic.json');
+        setorientation('polyclinic');
+
+        setMenuData(result.data);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
         const result = await axios('/data/menu-donor.json');
         setorientation('donor');
-
         setMenuData(result.data);
     }}
 
@@ -103,8 +104,6 @@ const VerticalLayout = ({ children }: Props) => {
         orientation={orientation}
         data={menuData}
       />
-
-      {/* <AddPatient /> */}
 
       <Menu className='assistant-menu' orientation='vertical'>
         <NavLink className='link' to='/vertical/settings' activeClassName='active' replace>

@@ -155,7 +155,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
             </h5>
           </div>
 
-          <p style={{ color: '#8f8f90' }}>UI/UX Designer</p>
+          <p style={{ color: '#8f8f90' }}>Username : { user.user.username}</p>
 
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolore enim, nemo
