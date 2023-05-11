@@ -12,7 +12,7 @@ import {
   patientsAgeOptions
 } from './charts/patients-options';
 
-import { usePageData } from '../../../hooks/usePage';
+import { useFetchPageData, usePageData } from '../../../hooks/usePage';
 
 import { IPageData } from '../../../interfaces/page';
 
@@ -31,6 +31,8 @@ const pageData: IPageData = {
 
 const DashboardPage = () => {
   // const [appointments] = axios<IAppointment[]>('./data/last-appointments.json', []);
+  usePageData(pageData);
+  const [aa, b] = useFetchPageData('/patient');
   usePageData(pageData);
 
   return (

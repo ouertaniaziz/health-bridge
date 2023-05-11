@@ -10,50 +10,60 @@ import { IPatient } from '../../../interfaces/patient';
 import PatientForm from '../../../layout/components/patients/PatientForm';
 import { usePatients } from '../../../hooks/usePatients';
 import { IStoragemed } from '../../../interfaces/Istoragemed';
-import { useFetchPageData } from '../../../hooks/usePage';
+import { useFetchPageData, usePageData } from '../../../hooks/usePage';
 import PageAction from '../page-action/PageAction';
 import Webcam from 'react-webcam';
 import axiosInstance from '../../../config/axios';
-const id =JSON.parse(localStorage.getItem('user'))?.id;
+import { IPageData } from '../../../interfaces/page';
+const pageData: IPageData = {
+  title: 'Medicaments',
+  fulFilled: false,
+  breadcrumbs: [
+    {
+      title: 'Dashbord',
+      route: 'default-dashboard'
+    },
+    {
+      title: 'Medicaments'
+    }
+  ]
+};
+const id = JSON.parse(localStorage.getItem('user'))?.id;
 type Props = {
   patients: IPatient[];
   onEditPatient?: (patient: IPatient) => void;
   onDeletePatient?: (id: string) => void;
 };
 
-
 const actions = (patient: IPatient) => (
-    <div className='buttons-list nowrap'>
-      
-      <Button shape='circle' type='primary'>
-        <span className='icofont icofont-edit-alt' />
-      </Button>
-     
-    </div>
-  );
+  <div className='buttons-list nowrap'>
+    <Button shape='circle' type='primary'>
+      <span className='icofont icofont-edit-alt' />
+    </Button>
+  </div>
+);
 
-
-interface storage{
-    storage: IStoragemed[];
+interface storage {
+  storage: IStoragemed[];
 }
-const Medications = ({
-  onEditPatient = () => null,
-  onDeletePatient = () => null
-}: Props) => {
-    const [storagemeds,setstoragemeds] = useFetchPageData<storage>('/pharmacist/getallmedicationsinstorage');
-    const { patients, editPatient, deletePatient } = usePatients();
-    const videoConstraints = {
-        width: 720,
-        height: 500,
-        facingMode: 'user'
-      };
-    
+const Medications = ({ onEditPatient = () => null, onDeletePatient = () => null }: Props) => {
+  const [storagemeds, setstoragemeds] = useFetchPageData<storage>(
+    '/pharmacist/getallmedicationsinstorage'
+  );
+  const { patients, editPatient, deletePatient } = usePatients();
+  const videoConstraints = {
+    width: 720,
+    height: 500,
+    facingMode: 'user'
+  };
+
   const history = useHistory();
 
   const [patient, setPatient] = useState(null);
   const [visibility, setVisibility] = useState(false);
   const webref = useRef(null);
-
+  const [aa, b] = useFetchPageData('/patient');
+  usePageData(pageData);
   const closeModal = () => setVisibility(false);
 
   const handleShowInfo = () => history.push('/vertical/patient-profile');
@@ -63,8 +73,8 @@ const Medications = ({
     setVisibility(true);
   };
 
-//request
-const capture = React.useCallback(() => {
+  //request
+  const capture = React.useCallback(() => {
     const imageSrc = webref.current.getScreenshot();
   }, [webref]);
   const handleimage = async () => {
@@ -73,21 +83,23 @@ const capture = React.useCallback(() => {
     // console.log(webref.current.getScreenshot());
     let formData = new FormData();
     //console.log('rr');
-    let data:string = webref.current.getScreenshot().split(',')[1];
+    let data: string = webref.current.getScreenshot().split(',')[1];
     formData.append('file', data);
     formData.append('_id', id);
     //console.log('image', formData.get('image'));
     video.pause();
 
-     await axiosInstance.post('/pharmacist/getmedicamentfromimage',formData).then((res)=>{console.log(res.data)})
+    await axiosInstance.post('/pharmacist/getmedicamentfromimage', formData).then((res) => {
+      console.log(res.data);
+    });
 
-    console.log('res',webref.current.getScreenshot());
+    console.log('res', webref.current.getScreenshot());
 
     //setimg(webref.current.getScreenshot());
   };
-//
+  //
 
-  const columns: ColumnProps<IPatient>[] = [
+  const columns: ColumnProps<IStoragemed>[] = [
     {
       key: 'medicationname',
       title: 'Medication Name',
@@ -98,36 +110,37 @@ const capture = React.useCallback(() => {
       key: 'Dosage',
       dataIndex: 'Dosage',
       title: 'Dosage',
-      sorter: (a, b) => (a.name > b.name ? 1 : -1),
+      //sorter: (a, b) => (a.name > b.name ? 1 : -1),
       render: (name) => <strong>{name}</strong>
     },
     {
       key: 'Dateofmanufacture',
       dataIndex: 'Dateofmanufacture',
       title: 'Date of manufacture',
-      sorter: (a, b) => (a.id > b.id ? 1 : -1),
+      //sorter: (a, b) => (a.id > b.id ? 1 : -1),
       render: (id) => (
         <span className='nowrap' style={{ color: '#a5a5a5' }}>
           {id}
         </span>
       )
-    },{
-        key: 'Dateofmanufacture',
-        dataIndex: 'Dateofmanufacture',
-        title: 'Date of manufacture',
-        sorter: (a, b) => (a.id > b.id ? 1 : -1),
-        render: (id) => (
-          <span className='nowrap' style={{ color: '#a5a5a5' }}>
-            {id}
-          </span>
-        )
-      },
-    
+    },
+    {
+      key: 'Dateofmanufacture',
+      dataIndex: 'Dateofmanufacture',
+      title: 'Date of manufacture',
+      //sorter: (a, b) => (a.id > b.id ? 1 : -1),
+      render: (id) => (
+        <span className='nowrap' style={{ color: '#a5a5a5' }}>
+          {id}
+        </span>
+      )
+    },
+
     {
       key: 'numPackets',
       dataIndex: 'numPackets',
       title: 'number of Packets',
-      sorter: (a, b) => a.age - b.age,
+      //sorter: (a, b) => a.age - b.age,
       render: (age) => (
         <span className='nowrap' style={{ color: '#a5a5a5' }}>
           {age}
@@ -135,10 +148,10 @@ const capture = React.useCallback(() => {
       )
     },
     {
-        key: 'actions',
-        title: 'Actions',
-        render: actions
-      }
+      key: 'actions',
+      title: 'Actions',
+      render: actions
+    }
     // {
     //   key: 'status',
     //   dataIndex: 'status',
@@ -150,14 +163,13 @@ const capture = React.useCallback(() => {
     //   ),
     //   sorter: (a, b) => (a.status > b.status ? 1 : -1)
     // },
-   
   ];
 
   const pagination = storagemeds?.storage.length <= 10 ? false : {};
 
   return (
     <>
-          <PageAction onClick={() => setVisibility(true)} icon='icofont-plus' type='primary' />
+      <PageAction onClick={() => setVisibility(true)} icon='icofont-plus' type='primary' />
 
       <Table
         pagination={pagination}
@@ -173,12 +185,10 @@ const capture = React.useCallback(() => {
         onCancel={closeModal}
         title={<h3 className='title'>Add Medicament</h3>}
         width='900px'
-        
-        
       >
-         <Webcam ref={webref} screenshotFormat='image/jpeg' videoConstraints={videoConstraints} />
-      <Button onClick={handleimage}>Snap !</Button>
-      {/* {alert && (
+        <Webcam ref={webref} screenshotFormat='image/jpeg' videoConstraints={videoConstraints} />
+        <Button onClick={handleimage}>Snap !</Button>
+        {/* {alert && (
         <Alert
           message='Success Tips'
           type={'success'}
@@ -186,7 +196,7 @@ const capture = React.useCallback(() => {
           showIcon
         />
       )} */}
-      {/* <img src={img}></img> */}
+        {/* <img src={img}></img> */}
       </Modal>
     </>
   );

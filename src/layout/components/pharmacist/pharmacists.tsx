@@ -54,7 +54,7 @@ const Pharmacists = () => {
       <PageAction onClick={openModal} icon='icofont-contact-add' />
 
       <Modal
-        open={addingPharmacists}
+        open={addingPharmacist}
         onCancel={closeModal}
         title={<h3 className='title'>Add pharmacist </h3>}
         destroyOnClose

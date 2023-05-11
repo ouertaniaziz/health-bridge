@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { usePageData } from '../../../hooks/usePage';
-import { Avatar, Button, Card, Rate, Tag, Timeline, Modal, Input } from 'antd';
+import { Avatar, Button, Card, Rate, Tag, Timeline, Modal, Form, Upload, Input } from 'antd';
 import { IPageData } from '../../../interfaces/page';
 import PatientForm from '../../../layout/components/patients/PatientForm';
 import { IPatient } from '../../../interfaces/patient';
@@ -11,7 +11,8 @@ import { useHideLoader } from '../../../hooks/useHideLoader';
 import { IPatientModel } from '../../../interfaces/patientmodel';
 import { IRecord } from '../../../interfaces/Record';
 import { Hideloaderpatient } from '../../../hooks/hideloaderpatient';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import axiosInstance from '../../../config/axios';
 
 const pageData: IPageData = {
   title: 'Patient profile',
@@ -19,7 +20,7 @@ const pageData: IPageData = {
   breadcrumbs: [
     {
       title: 'Patient',
-      route: 'default-dashboard'
+      route: 'Patient-dashboard'
     },
 
     {
@@ -92,9 +93,24 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
     status: 'approved',
     id: '10021'
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const user = useContext<Patientcontextype>(Patientcontext);
-
+  const user = useContext<Patientcontextype | null>(Patientcontext);
+  const { records, setrecords } = useContext<Patientcontextype | null>(Patientcontext);
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(selectedFile);
+    let formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('username', user.user.username);
+    await axiosInstance
+      .post('/patient/addfiles', formData)
+      .then((res) => setrecords([...records, res.data.record]));
+  };
   const modals = {
     withDefaultOverlay: 'withDefaultOverlay'
   };
@@ -155,13 +171,19 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
             </h5>
           </div>
 
-          <p style={{ color: '#8f8f90' }}>Username : { user.user.username}</p>
+          <p style={{ color: '#8f8f90' }}>Username : {user.user.username}</p>
 
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolore enim, nemo
-            nihil non omnis temporibus? Blanditiis culpa labore velit.Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Dicta, provident?
-          </p>
+          <p>Health Bridge Patient</p>
+        </Card>
+        <Card
+          title='Add Medical records'
+          className='with-shadow mb-0'
+          style={{ height: '120px', marginTop: '-15px' }}
+        >
+          <div className=''>
+            <input type='file' onChange={handleFileChange} style={{ backgroundColor: 'white' }} />
+            <Button onClick={handleSubmit}>Upload</Button>
+          </div>
         </Card>
       </div>
 
@@ -187,7 +209,7 @@ const Profile = ({ onEditPatient = () => null }: Props) => {
                 }}
                 onClick={(event) => handleclick(record)}
               >
-                {record.filename}
+                {record.filename.split('.')[0]}
               </Tag>
             ))}
           </div>

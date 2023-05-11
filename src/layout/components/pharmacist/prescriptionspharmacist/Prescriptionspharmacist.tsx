@@ -10,7 +10,7 @@ import { IPrescription } from '../../../../interfaces/prescription';
 import axiosInstance from '../../../../config/axios';
 import PrescriptionPharmacistTable from './Prescriptionspharmacisttable';
 import { set } from 'mongoose';
-const pharmacistid=JSON.parse(localStorage.getItem('user'))?.id;
+const pharmacistid = JSON.parse(localStorage.getItem('user'))?.id;
 const pageData: IPageData = {
   title: 'Prescription',
   fulFilled: false,
@@ -28,12 +28,10 @@ const pageData: IPageData = {
   ]
 };
 interface PharmacistWithKey extends IPrescription {
-
-  key:number
-  
-    }
+  key: number;
+}
 interface PrescriptionTablePolyclinicProps {
-  data:Partial <PharmacistWithKey>[];
+  data: Partial<PharmacistWithKey>[];
   actions: (prescription: IPrescription) => JSX.Element;
 }
 const PrescriptionPharmacist = () => {
@@ -41,31 +39,31 @@ const PrescriptionPharmacist = () => {
   const [open, setOpen] = useState(false);
   const [opendecline, setOpendecline] = useState(false);
   type NotificationType = 'success' | 'info' | 'warning' | 'error';
-  
-  const [selectedp, setselectedp] = useState<PharmacistWithKey>();
-  const[selectedkey,setkey]=useState<number>();
-  const [api, contextHolder] = notification.useNotification();
-  const [Prescription, setPrescription] = useFetchPageData<IPrescription[]>(`/pharmacist/getallprescriptions/${pharmacistid}`);
-  const [testdata,settestdata]=useState<Partial<PharmacistWithKey>[]>();
-  var alldata:Partial<PharmacistWithKey>[]=Prescription?.map((prescription,index)=>{
-    return{
-        key:index,
-        _id:prescription._id,
-        doctor:prescription.doctor,
-        patient:prescription.patient,
-        traitement:prescription.traitement,
-        date:prescription.date
-    }
-  })
-  useEffect(()=>{
-    settestdata(alldata);
 
-  },[])
+  const [selectedp, setselectedp] = useState<PharmacistWithKey>();
+  const [selectedkey, setkey] = useState<number>();
+  const [api, contextHolder] = notification.useNotification();
+  const [Prescription, setPrescription] = useFetchPageData<IPrescription[]>(
+    `pharmacist/getallprescriptions/${pharmacistid}`
+  );
+  const [testdata, settestdata] = useState<Partial<PharmacistWithKey>[]>();
+  var alldata: Partial<PharmacistWithKey>[] = Prescription?.map((prescription, index) => {
+    return {
+      key: index,
+      _id: prescription._id,
+      doctor: prescription.doctor,
+      patient: prescription.patient,
+      traitement: prescription.traitement,
+      date: prescription.date
+    };
+  });
+  useEffect(() => {
+    settestdata(alldata);
+  }, []);
   const Notificationwithfail = (type: NotificationType) => {
     api[type]({
       message: `an Error has been occured `,
-      description:
-        'an Error has been occured ,please try again later!'
+      description: 'an Error has been occured ,please try again later!'
     });
   };
   const Notificationwithsuccess = (type: NotificationType, text: String) => {
@@ -77,57 +75,53 @@ const PrescriptionPharmacist = () => {
   };
   const handleselec = (Prescription) => {
     //console.log(Prescription)
-      console.log(Prescription)
-      setOpen(true);
-      setkey(Prescription.key)    
+    console.log(Prescription);
+    setOpen(true);
+    setkey(Prescription.key);
 
     setselectedp(Prescription);
   };
-  
+
   const handleOK = () => {
-//     axiosInstance
-//       .post('/pharmacist/addprescriptiontoPharmacist', { user:pharmacistid,prescription:selectedp._id })
-//       .then((res) => {
-// setTimeout(() => {
-//           Notificationwithsuccess('success', 'Approval');
-  
-// }, 1000);
-//          setselectedp(null);
-//         setkey(null)
-//         setOpen(false);
-//         // find the index of the item with key "c"
+    axiosInstance
+      .post('/pharmacist/addprescriptiontoPharmacist', {
+        user: pharmacistid,
+        prescription: selectedp._id
+      })
+      .then((res) => {
+        setTimeout(() => {
+          Notificationwithsuccess('success', 'Approval');
+        }, 1000);
+        setselectedp(null);
+        setkey(null);
+        setOpen(false);
+        // find the index of the item with key "c"
 
-
-//         Notificationwithsuccess('success', 'Approval');
-//         console.log('approved triggered');
-       
-//       })
-//       .catch((error) => {
-//         console.log(error.message);
-//           setselectedp(null);
-//         setkey(null)
-//         setOpen(false);
-//         Notificationwithfail('error');
-      
-//       });
-let index = testdata.findIndex(item => item._id === selectedp._id);
-console.log(index)
-// extract a portion of the array starting at that index
-     settestdata(alldata.splice(index, 1));
-        setOpen(false)
-        console.log(testdata)
+        Notificationwithsuccess('success', 'Approval');
+        console.log('approved triggered');
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setselectedp(null);
+        setkey(null);
+        setOpen(false);
+        Notificationwithfail('error');
+      });
+    // let index = testdata.findIndex((item) => item._id === selectedp._id);
+    // console.log(index);
+    // // extract a portion of the array starting at that index
+    // settestdata(alldata.splice(index, 1));
+    // setOpen(false);
+    // console.log(testdata);
+    setOpen(false);
   };
- 
 
-const handlecancel=()=>{
-  setOpen(false);
-  setkey(null)
-}
+  const handlecancel = () => {
+    setOpen(false);
+    setkey(null);
+  };
   usePageData(pageData);
 
-  
-  
-  
   const prescriptionActions = (Prescription) => (
     <div className='buttons-list nowrap' style={{ width: '120px' }}>
       {contextHolder}
@@ -135,7 +129,7 @@ const handlecancel=()=>{
         <Popconfirm
           title='Title'
           description='Open Popconfirm with async logic'
-          open={ open === true &&Prescription.key===selectedkey}
+          open={open === true && Prescription.key === selectedkey}
           onConfirm={handleOK}
           onCancel={handlecancel}
         >
@@ -174,7 +168,7 @@ const handlecancel=()=>{
   const PrescriptionTableWithActions = ({ data, actions }: PrescriptionTablePolyclinicProps) => {
     return <PrescriptionPharmacistTable data={alldata} actions={actions} />;
   };
- 
+
   const PrescriptionTableWithRemoveActions: React.FC<
     PropsWithChildren<PrescriptionTablePolyclinicProps>
   > = ({ children, data, actions }) => {
@@ -183,7 +177,6 @@ const handlecancel=()=>{
         {contextHolder}
         <PrescriptionPharmacistTable data={alldata} actions={actions}></PrescriptionPharmacistTable>
       </>
-
     );
   };
 

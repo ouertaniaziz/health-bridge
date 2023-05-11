@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 
-import { Badge, Table, Alert, Button, Space ,Dropdown,Menu} from 'antd';
+import { Badge, Table, Alert, Button, Space, Dropdown, Menu } from 'antd';
 
 import { ColumnProps } from 'antd/es/table';
 import { IMedication } from '../../../../interfaces/patient';
@@ -9,13 +9,13 @@ import { relative } from 'path';
 import Popconfirm from 'antd/lib/popconfirm';
 import { DownOutlined } from '@ant-design/icons';
 const menu = (
-    <Menu>
-      <Menu.Item>Action 1</Menu.Item>
-      <Menu.Item>Action 2</Menu.Item>
-    </Menu>
-  );
+  <Menu>
+    <Menu.Item>Action 1</Menu.Item>
+    <Menu.Item>Action 2</Menu.Item>
+  </Menu>
+);
 
-const columns: ColumnProps<IPrescription>[] = [
+const columns: ColumnProps<any>[] = [
   {
     key: 'name',
     dataIndex: 'doctor',
@@ -62,65 +62,62 @@ const columns: ColumnProps<IPrescription>[] = [
         {date.slice(0, 10)}
       </span>
     )
-  },
-  
+  }
 ];
 interface PharmacistWithKey extends IPrescription {
-
-  key:number
-  
-    }
+  key: number;
+}
 type Props = {
   data: Partial<PharmacistWithKey>[];
   actions?: (prescription: IPrescription) => ReactNode;
 };
 const PrescriptionPharmacistTable = ({ data, actions }: Props) => {
-    //new table
-    const [expandedRowKeys, setExpandedRowKeys] = useState<IPrescription>();
+  //new table
+  const [expandedRowKeys, setExpandedRowKeys] = useState<IPrescription>();
 
-    const expandedRowRender = (Prescription,key) => {
-          //  if(Prescription.date===expandedRowKeys.date){
-        const columns = [
-          { title: 'medication Name', dataIndex: 'medicationName', key: 'medicationName' },
-          { title: 'dosage Form', dataIndex: 'dosageForm', key: 'dosageForm' },
-         ,{
-            title: 'validation Period',dataIndex:'validationPeriod',key:'validationPeriod'
-    
-         },{
-            title:'expiration Date',dataIndex:'expirationDate',key:'expirationDate'
-         },
-          { title: 'Number of packets ', dataIndex: 'numPackets', key: 'numPackets' },
-         
-      
-        ];
-    
-        const dataplus=Prescription.traitement  
-         const new_data:any=Prescription.traitement.map((medication,index)=>{
-            return{
-                key:index,
-                medicationName:medication.medicationName,
-                dosageForm:medication.dosageForm,
-                validationPeriod:medication.validationPeriod.slice(0, 10),
-                expirationDate:medication.expirationDate.slice(0, 10),
-                numPackets:medication.numPackets
-            }
-         })
-         {}
-        return <Table columns={columns} dataSource={new_data} pagination={false} />;
-            // }
-            // else{
-            //     return null;
-            // }
+  const expandedRowRender = (Prescription, key) => {
+    const columns: ColumnProps<IPrescription>[] = [
+      { title: 'medication Name', dataIndex: 'medicationName', key: 'medicationName' },
+      { title: 'dosage Form', dataIndex: 'dosageForm', key: 'dosageForm' },
+      {
+        title: 'validation Period',
+        dataIndex: 'validationPeriod',
+        key: 'validationPeriod'
+      },
+      {
+        title: 'expiration Date',
+        dataIndex: 'expirationDate',
+        key: 'expirationDate'
+      },
+      { title: 'Number of packets ', dataIndex: 'numPackets', key: 'numPackets' }
+    ];
+    const dataplus = Prescription.traitement;
+    const new_data: any = Prescription.traitement.map((medication, index) => {
+      return {
+        key: index,
+        medicationName: medication.medicationName,
+        dosageForm: medication.dosageForm,
+        validationPeriod: medication.validationPeriod.slice(0, 10),
+        expirationDate: medication.expirationDate.slice(0, 10),
+        numPackets: medication.numPackets
       };
+    });
+    {
+    }
+    return <Table columns={columns} dataSource={new_data} pagination={false} />;
+    // }
+    // else{
+    //     return null;
+    // }
+  };
 
-    /////////////
+  /////////////
   const actionColumn: ColumnProps<IPrescription> = {
     key: 'actions',
     title: 'Actions',
     render: actions
   };
- 
-  
+
   const displayedColumns = actions ? [...columns, actionColumn] : columns;
 
   return (
@@ -130,14 +127,12 @@ const PrescriptionPharmacistTable = ({ data, actions }: Props) => {
         className='components-table-demo-nested'
         columns={displayedColumns}
         expandedRowRender={expandedRowRender}
-        onexpand={(expanded, record) => {
-           // setExpandedRowKeys(record)
-           console.log("hia",record,'ex',expanded)
+        onExpand={(expanded, record) => {
+          // setExpandedRowKeys(record)
+          console.log('hia', record, 'ex', expanded);
         }}
-        
         pagination={{ hideOnSinglePage: true }}
       />
-    
     </>
   );
 };

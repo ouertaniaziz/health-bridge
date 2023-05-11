@@ -38,7 +38,7 @@ const pageData: IPageData = {
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-const AccountForm = ({ user }) => {
+const AccountForm = ({ userr }) => {
   const [submitted, setSubmitted] = useState({});
   const patient = useContext<Patientcontextype>(Patientcontext);
   const emptyPatient: IPatientModel = {
@@ -62,23 +62,34 @@ const AccountForm = ({ user }) => {
   const openNotificationWithIconsucc = (type: NotificationType) => {
     api[type]({
       message: 'successfully updated!',
-      description:
-        'Sucess'
+      description: 'Sucess'
     });
   };
+  const { user, setuser } = useContext(Patientcontext);
+
   const { values, setValues, handleSubmit } = useFormik<IPatientModel>({
     onSubmit: async (values) => {
       //setSubmitted(values);
       console.log(values);
-      let user = { ...values, _id: patient.user._id };
-      console.log(user);
+      let usera = { ...values, _id: patient.user._id };
+      console.log(usera);
+      setuser({
+        ...user,
+        firstname: values.firstname,
+        lastname: values.lastname,
+        phone: values.phone,
+        email: values.email,
+        cty: values.city,
+        gender: values.gender,
+        state: values.state,
+        postal_code: values.postal_code
+      });
       await axiosInstance
         .put('patient/updatepatient', {
-          user
+          usera
         })
         .then((response) => {
           openNotificationWithIconsucc('success');
-
         })
         .catch((error) => {
           openNotificationWithIcon('error');
@@ -288,7 +299,7 @@ const EditPatient = () => {
 
   return (
     <div className='stack' style={{ maxWidth: 690, margin: '0 auto' }}>
-      <AccountForm user={user} />
+      <AccountForm userr={user} />
 
       <Divider />
 

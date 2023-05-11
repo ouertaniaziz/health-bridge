@@ -12,7 +12,7 @@ import {
   patientsAgeOptions
 } from './charts/patients-options';
 
-import { usePageData } from '../../../hooks/usePage';
+import { useFetchPageData, usePageData } from '../../../hooks/usePage';
 
 import { IPageData } from '../../../interfaces/page';
 
@@ -30,6 +30,8 @@ const pageData: IPageData = {
 };
 
 const DoctorDashbord = () => {
+  const [aa, b] = useFetchPageData('/patient');
+  usePageData(pageData);
   return (
     <>
       <div className='row'>

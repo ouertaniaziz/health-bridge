@@ -56,7 +56,8 @@ const PrescriptionPolyclinic = () => {
     });
   };
   const handleselec = (Prescription: IPrescription) => {
-    axiosInstance
+    {
+      /*  axiosInstance
       .post('/predict', {
         age: 20,
         sex: 'femme',
@@ -66,14 +67,13 @@ const PrescriptionPolyclinic = () => {
         smoker: false,
         region: 'northwest'
       })
-      .then((res) => {
-        setPredict(res.data);
-        if (opendecline === false) {
-          setOpen(true);
-        }
+    .then((res) => {})*/
+    }
+    if (opendecline === false) {
+      setOpen(true);
+    }
 
-        setselectedp(Prescription);
-      });
+    setselectedp(Prescription);
   };
   const handleselecdeclined = (Prescription: IPrescription) => {
     if (open === false) {

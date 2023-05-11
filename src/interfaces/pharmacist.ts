@@ -1,7 +1,7 @@
 import { IPrescription } from './prescription';
 
 export interface IPharmacist {
-    _id?: string;
+  _id?: string;
   firstname?: string;
   lastname?: string;
   username?: string;
@@ -19,32 +19,26 @@ export interface IPharmacist {
   failedLoginAttempts?: number;
   emailtoken?: string;
   dateOfBirth?: string;
-  gender: string;
-  city: string;
-  postal_code: string;
-  state: string;
+  gender?: string;
+  city?: string;
+  postal_code?: string;
+  state?: string;
 
-
-    //pharmacist
-    pharmacyName?: string;
-    pharmacyAddress?: string;
-    InsurranceInformation?: string;
-
-  
+  //pharmacist
+  pharmacyName?: string;
+  pharmacyAddress?: string;
+  InsurranceInformation?: string;
 }
 
 export interface ITraitement {
-    medicationName: string;
-    manufacturer: string;
-    dosageForm: string;
-    dosageStrength: string;
-    validationPeriod: Date;
-    expirationDate: Date;
-    prescriptionRequired: boolean;
-    numPackets: number;
-    description: string;
-    prescriptions: IPrescription['id'][];
-  }
-
-
-
+  medicationName: string;
+  manufacturer: string;
+  dosageForm: string;
+  dosageStrength: string;
+  validationPeriod: Date;
+  expirationDate: Date;
+  prescriptionRequired: boolean;
+  numPackets: number;
+  description: string;
+  prescriptions: IPrescription['id'][];
+}

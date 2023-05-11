@@ -91,7 +91,6 @@ const AppointmentsPage = () => {
       <>
         <AppointmentsTable data={appointments} actions={appointmentsActions} />
 
-        <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
 
         <AddAppointment
           onClose={closeAddingModal}
