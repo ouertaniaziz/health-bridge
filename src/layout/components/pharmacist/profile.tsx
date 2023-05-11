@@ -65,44 +65,44 @@ const UserPreview = () => {
   );
 };
 
-const Socials = () => {
-  return (
-    <Card className='with-shadow' title='Websites & social channel'>
-      <div className='row align-items-center mb-3'>
-        <div className='col col-auto'>
-          <span className='icofont-github' style={{ fontSize: 30, color: '#24292e' }} />
-        </div>
-        <div className='col'>
-          <div>Github</div>
-          <a href='#' onClick={(e) => e.preventDefault()}>
-            github.com/malek-zlitni
-          </a>
-        </div>
-      </div>
+// const Socials = () => {
+//   return (
+//     <Card className='with-shadow' title='Websites & social channel'>
+//       <div className='row align-items-center mb-3'>
+//         <div className='col col-auto'>
+//           <span className='icofont-github' style={{ fontSize: 30, color: '#24292e' }} />
+//         </div>
+//         {/* <div className='col'>
+//           <div>Github</div>
+//           <a href='#' onClick={(e) => e.preventDefault()}>
+//             github.com/malek-zlitni
+//           </a>
+//         </div> */}
+//       </div>
 
-      <div className='row align-items-center mb-3'>
-        <div className='col col-auto'>
-          <span className='icofont-twitter' style={{ fontSize: 30, color: '#1da1f2' }} />
-        </div>
-        <div className='col'>
-          <div>Twitter</div>
-          <a href='#' onClick={(e) => e.preventDefault()}>
-            twitter.com/malekzlitni
-          </a>
-        </div>
-      </div>
+//       {/* <div className='row align-items-center mb-3'>
+//         <div className='col col-auto'>
+//           <span className='icofont-twitter' style={{ fontSize: 30, color: '#1da1f2' }} />
+//         </div>
+//         <div className='col'>
+//           <div>Twitter</div>
+//           <a href='#' onClick={(e) => e.preventDefault()}>
+//             twitter.com/malekzlitni
+//           </a>
+//         </div>
+//       </div>
 
-      <div className='row align-items-center mb-3'>
-        <div className='col col-auto'>
-          <span className='icofont-linkedin' style={{ fontSize: 30, color: '#0073b1' }} />
-        </div>
-        <div className='col'>
-          <div>LinkedIn</div>
-          <a href='#' onClick={(e) => e.preventDefault()}>
-            linkedin.com/malek-zlitni
-          </a>
-        </div>
-      </div>
+//       <div className='row align-items-center mb-3'>
+//         <div className='col col-auto'>
+//           <span className='icofont-linkedin' style={{ fontSize: 30, color: '#0073b1' }} />
+//         </div>
+//         <div className='col'>
+//           <div>LinkedIn</div>
+//           <a href='#' onClick={(e) => e.preventDefault()}>
+//             linkedin.com/malek-zlitni
+//           </a>
+//         </div>
+//       </div> */}
 
       {/* <div className='row align-items-center mb-3'>
         <div className='col col-auto'>
@@ -115,9 +115,9 @@ const Socials = () => {
           </a>
         </div>
       </div> */}
-    </Card>
-  );
-};
+//     </Card>
+//   );
+// };
 
 const ContactInfo = () => {
   return (
@@ -134,11 +134,11 @@ const ContactInfo = () => {
 
       <div className='row align-items-center mb-3'>
         <div className='col col-auto'>
-          <span className='icofont-slack' style={{ fontSize: 30, color: '#8f8f90' }} />
+          <span className='icofont-email' style={{ fontSize: 30, color: '#8f8f90' }} />
         </div>
         <div className='col'>
-          <div>Slack</div>
-          @malekzlitni
+          <div>Email</div>
+          malek.zlitni@esprit.tn
         </div>
       </div>
 
@@ -165,27 +165,27 @@ const ContactInfo = () => {
   );
 };
 
-const Experience = () => {
-  return (
-    <Card title='Experience' className='with-shadow'>
-      <Timeline>
-        <Timeline.Item color='green'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            20017 - Present
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>UI/UX Designers</strong> - IronSketch
-          </span>
-        </Timeline.Item>
+// const Experience = () => {
+//   return (
+//     <Card title='Experience' className='with-shadow'>
+//       <Timeline>
+//         <Timeline.Item color='green'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             20017 - Present
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>UI/UX Designers</strong> - IronSketch
+//           </span>
+//         </Timeline.Item>
 
-        <Timeline.Item color='blue'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            2015 - 2017
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>pharmacist</strong> - Oxford University
-          </span>
-        </Timeline.Item>
+//         <Timeline.Item color='blue'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             2015 - 2017
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>pharmacist</strong> - Oxford University
+//           </span>
+//         </Timeline.Item>
 
         {/* <Timeline.Item color='red'>
           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
@@ -204,90 +204,90 @@ const Experience = () => {
             <strong>UI/UX Designer</strong> - Design ArtData
           </span>
         </Timeline.Item> */}
-      </Timeline>
-    </Card>
-  );
-};
+//       </Timeline>
+//     </Card>
+//   );
+// };
 
-const Education = () => {
-  return (
-    <Card title='Education' className='with-shadow'>
-      <Timeline>
-        <Timeline.Item color='red'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            2008 - 2009
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>Special schools</strong> - Edison Schools
-          </span>
-        </Timeline.Item>
+// const Education = () => {
+//   return (
+//     <Card title='Education' className='with-shadow'>
+//       <Timeline>
+//         <Timeline.Item color='red'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             2008 - 2009
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>Special schools</strong> - Edison Schools
+//           </span>
+//         </Timeline.Item>
 
-        <Timeline.Item color='red'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            2007 - 2008
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>Technical schools</strong> - Jules E. Mastbaum Technical High School
-          </span>
-        </Timeline.Item>
+//         <Timeline.Item color='red'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             2007 - 2008
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>Technical schools</strong> - Jules E. Mastbaum Technical High School
+//           </span>
+//         </Timeline.Item>
 
-        <Timeline.Item color='red'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            2005 - 2007
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>High schools</strong> - Benjamin Franklin High School
-          </span>
-        </Timeline.Item>
+//         <Timeline.Item color='red'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             2005 - 2007
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>High schools</strong> - Benjamin Franklin High School
+//           </span>
+//         </Timeline.Item>
 
-        <Timeline.Item color='green'>
-          <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
-            1996 - 2004
-          </div>
-          <span className='primary-text mb-4'>
-            <strong>Middle schools</strong> - Bethune, Mary Mcleod School
-          </span>
-        </Timeline.Item>
-      </Timeline>
-    </Card>
-  );
-};
+//         <Timeline.Item color='green'>
+//           <div style={{ opacity: 0.8 }} className='date w-100 mb-2'>
+//             1996 - 2004
+//           </div>
+//           <span className='primary-text mb-4'>
+//             <strong>Middle schools</strong> - Bethune, Mary Mcleod School
+//           </span>
+//         </Timeline.Item>
+//       </Timeline>
+//     </Card>
+//   );
+// };
 
-const Skills = () => {
-  const skills = [
-    'HTML',
-    'PHP',
-    'CSS',
-    'SCSS',
-    'ANGUlAR',
-    'REACT',
-    'VUE.JS',
-    'JAVASCRIPT',
-    'TYPESCRIPT'
-  ];
+// const Skills = () => {
+//   const skills = [
+//     'HTML',
+//     'PHP',
+//     'CSS',
+//     'SCSS',
+//     'ANGUlAR',
+//     'REACT',
+//     'VUE.JS',
+//     'JAVASCRIPT',
+//     'TYPESCRIPT'
+//   ];
 
-  return (
-    <Card title='Skills' className='with-shadow mb-0'>
-      <div className='elem-list skills-list'>
-        {skills.map((skill, i) => (
-          <Tag
-            key={i}
-            color='#336cfb'
-            style={{
-              backgroundColor: 'transparent',
-              borderColor: '#336cfb',
-              borderRadius: 500,
-              color: '#336cfb',
-              fontSize: 12
-            }}
-          >
-            {skill}
-          </Tag>
-        ))}
-      </div>
-    </Card>
-  );
-};
+//   return (
+//     <Card title='Skills' className='with-shadow mb-0'>
+//       <div className='elem-list skills-list'>
+//         {skills.map((skill, i) => (
+//           <Tag
+//             key={i}
+//             color='#336cfb'
+//             style={{
+//               backgroundColor: 'transparent',
+//               borderColor: '#336cfb',
+//               borderRadius: 500,
+//               color: '#336cfb',
+//               fontSize: 12
+//             }}
+//           >
+//             {skill}
+//           </Tag>
+//         ))}
+//       </div>
+//     </Card>
+//   );
+// };
 const Profile = () => {
   usePageData(pageData);
 
@@ -295,15 +295,15 @@ const Profile = () => {
     <div className='row'>
       <div className='col-md-6 col-sm-12'>
         <UserPreview />
-        <Socials />
+        {/* <Socials /> */}
         <ContactInfo />
       </div>
 
-      <div className='col-md-6 col-sm-12'>
+      {/* <div className='col-md-6 col-sm-12'>
         <Experience />
         <Education />
         <Skills />
-      </div>
+      </div> */}
     </div>
   );
 };

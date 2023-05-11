@@ -4,19 +4,18 @@ import { Modal } from 'antd';
 
 import className from '../../../utils/class-names';
 
-import Contact from '../../../layout/components/doctor/Contact';
 import PageAction from '../../../layout/components/page-action/PageAction';
-
 
 import { useFetchPageData, usePageData } from '../../../hooks/usePage';
 
 import { IUser } from '../../../interfaces/user';
 import { IPageData } from '../../../interfaces/page';
 import ContactPharmacist from './contactpharmacist';
+import PharmacistForm from './pharmacistForm';
 
 const pageData: IPageData = {
   title: 'Pharmacists',
-  fulFilled: false,
+  fulFilled: false,   
   breadcrumbs: [
     {
       title: 'Pharmacist',
@@ -31,12 +30,12 @@ const pageData: IPageData = {
 const Pharmacists = () => {
   usePageData(pageData);
   const [pharmacists, setpharmacists] = useFetchPageData('/pharmacist/getallpharmacists', []);
-  const [addingPharmacists, setAddingPharmacists] = useState(false);
+  const [addingPharmacist, setAddingPharmacists] = useState(false);
 
   const openModal = () => setAddingPharmacists(true);
   const closeModal = () => setAddingPharmacists(false);
 
-  const addingPharmacist = (pharmacist: IUser) => setpharmacists([pharmacist, ...pharmacists]);
+  const addingPharmacists = (pharmacist: IUser) => setpharmacists([pharmacist, ...pharmacists]);
 
   const getClass = (index: number, length: number) =>
     className({
@@ -48,7 +47,7 @@ const Pharmacists = () => {
     <div className='row'>
       {pharmacists.map((pharmacist, index) => (
         <div key={index} className='col-sm-12 col-md-6 col-lg-4'>
-          <ContactPharmacist className={getClass(index, pharmacists.length)} data={pharmacist.user} />
+          <ContactPharmacist className={getClass(index, pharmacists.length)} data={pharmacist} />
         </div>
       ))}
 
@@ -61,7 +60,7 @@ const Pharmacists = () => {
         destroyOnClose
         footer={null}
       >
-        {/* <pharmacistForm  onSubmit={addingPharmacist} onCancel={closeModal} /> */}
+        {/* <PharmacistForm  onSubmit ={addingPharmacist} onCancel={closeModal} /> */}
 
       </Modal>
     </div>

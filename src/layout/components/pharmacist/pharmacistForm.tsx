@@ -177,7 +177,7 @@ const PharmacistForm = ({ onSubmit, onCancel }: Props) => {
           </Button>
 
           <Button disabled={!isValid} onClick={handleSubmit} htmlType='submit' type='primary'>
-            Add Doctor
+            Add pharmacist
           </Button>
         </div>
       </Form>

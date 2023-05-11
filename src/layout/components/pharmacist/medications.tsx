@@ -13,7 +13,8 @@ import { IStoragemed } from '../../../interfaces/Istoragemed';
 import { useFetchPageData } from '../../../hooks/usePage';
 import PageAction from '../page-action/PageAction';
 import Webcam from 'react-webcam';
-
+import axiosInstance from '../../../config/axios';
+const id =JSON.parse(localStorage.getItem('user'))?.id;
 type Props = {
   patients: IPatient[];
   onEditPatient?: (patient: IPatient) => void;
@@ -72,12 +73,15 @@ const capture = React.useCallback(() => {
     // console.log(webref.current.getScreenshot());
     let formData = new FormData();
     //console.log('rr');
-    formData.append('image', webref.current.getScreenshot());
-    
+    let data:string = webref.current.getScreenshot().split(',')[1];
+    formData.append('file', data);
+    formData.append('_id', id);
     //console.log('image', formData.get('image'));
-    //const res = await axios.post('http://localhost:5000/face-recognition/num-faces', formData);
-    console.log('res',webref.current.getScreenshot());
     video.pause();
+
+     await axiosInstance.post('/pharmacist/getmedicamentfromimage',formData).then((res)=>{console.log(res.data)})
+
+    console.log('res',webref.current.getScreenshot());
 
     //setimg(webref.current.getScreenshot());
   };
