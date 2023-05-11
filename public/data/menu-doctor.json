@@ -8,7 +8,7 @@
     "icon": {
       "class": "icofont-thermometer-alt"
     },
-    "routing": "default-dashboard"
+    "routing": "doctor-dashboard"
   },
   {
     "title": "Appointments",
@@ -24,13 +24,7 @@
     },
     "routing": "doctors"
   },
-  {
-    "title": "Departments",
-    "icon": {
-      "class": "icofont-nurse"
-    },
-    "routing": "departments"
-  },
+
   {
     "title": "Patients",
     "icon": {

@@ -30,7 +30,6 @@ const pageData: IPageData = {
 const AppointmentsPage = () => {
   const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
   const history = useHistory();
-  usePageData(pageData);
   const [appointments, setAppointments] = useFetchPageData<IAppointment[]>(
     `./appointments/doctor/${doctorId}`,
     []

@@ -8,7 +8,7 @@ export function useNavigateHome() {
 }
 export function useNavigateDoctor() {
   const history = useHistory();
-  return useCallback(() => history.replace('/doctor/default-dashboard'), []);
+  return useCallback(() => history.replace('/doctor/doctor-dashboard'), []);
 }
 
 export function useNavigatePatient() {

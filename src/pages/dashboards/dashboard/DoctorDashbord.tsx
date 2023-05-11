@@ -21,7 +21,7 @@ const pageData: IPageData = {
   breadcrumbs: [
     {
       title: 'Dashboards',
-      route: 'default-dashboard'
+      route: 'docotor-dashboard'
     },
     {
       title: 'Default'
@@ -29,10 +29,7 @@ const pageData: IPageData = {
   ]
 };
 
-const DashboardPage = () => {
-  // const [appointments] = axios<IAppointment[]>('./data/last-appointments.json', []);
-  usePageData(pageData);
-
+const DoctorDashbord = () => {
   return (
     <>
       <div className='row'>
@@ -175,4 +172,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default DoctorDashbord;
