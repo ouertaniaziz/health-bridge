@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
@@ -14,6 +14,12 @@ type Props = IDoctor & OwnProps;
 
 const Contact = ({ user, name, speciality, _id, className }: Props) => {
   const history = useHistory();
+  const [doctor, setdoctor] = useState(true);
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
+      setdoctor(false);
+    }
+  }, []);
 
   const handleGoToProfile = () => {
     const layout = history.location.pathname.split('/')[1];
@@ -34,9 +40,11 @@ const Contact = ({ user, name, speciality, _id, className }: Props) => {
         <p className='address'>{user.city}</p>
 
         <div className='button-box'>
-          <Button type='primary' onClick={handleGoToProfile}>
-            book appointments
-          </Button>
+          {doctor && (
+            <Button type='primary' onClick={handleGoToProfile}>
+              book appointments
+            </Button>
+          )}
         </div>
       </div>
     </div>

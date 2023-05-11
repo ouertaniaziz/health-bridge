@@ -14,6 +14,7 @@ export interface IPatient {
   address: string;
   status?: string;
   lastVisit?: string;
+  _id?:string;
 }
 
 export interface IAppointment {

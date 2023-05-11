@@ -32,6 +32,8 @@ interface PrescriptionTablePolyclinicProps {
   actions: (prescription: IPrescription) => JSX.Element;
 }
 const PrescriptionPolyclinic = () => {
+  const [predict, setPredict] = useState(null);
+
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [opendecline, setOpendecline] = useState(false);
@@ -54,19 +56,30 @@ const PrescriptionPolyclinic = () => {
     });
   };
   const handleselec = (Prescription: IPrescription) => {
-    if (opendecline === false) {
-      setOpen(true);
-    }
+    axiosInstance
+      .post('/predict', {
+        age: 20,
+        sex: 'femme',
+        poids: 90,
+        taille: 12,
+        children: 1,
+        smoker: false,
+        region: 'northwest'
+      })
+      .then((res) => {
+        setPredict(res.data);
+        if (opendecline === false) {
+          setOpen(true);
+        }
 
-    setselectedp(Prescription);
-    
+        setselectedp(Prescription);
+      });
   };
   const handleselecdeclined = (Prescription: IPrescription) => {
     if (open === false) {
       setOpendecline(true);
     }
     setselectedp(Prescription);
-   
   };
   const handleOK = () => {
     axiosInstance
@@ -85,7 +98,6 @@ const PrescriptionPolyclinic = () => {
       .post('/polyclinics/declineprescription', { _id: selectedp._id })
       .then((res) => {
         Notificationwithsuccess('success', 'Decline');
-       
       })
       .catch((error) => {
         Notificationwithfail('error');
@@ -93,14 +105,13 @@ const PrescriptionPolyclinic = () => {
       });
   };
 
-
-
   usePageData(pageData);
 
   const [Prescription, setPrescription] = useFetchPageData<IPrescription[]>(
     `/polyclinics/prescriptions`,
     []
   );
+  const a = `fdsv ff${predict}`;
 
   const prescriptionActions = (Prescription: IPrescription) => (
     <div className='buttons-list nowrap' style={{ width: '120px' }}>
@@ -108,7 +119,7 @@ const PrescriptionPolyclinic = () => {
       <div>
         <Popconfirm
           title='Title'
-          description='Open Popconfirm with async logic'
+          description={`the coast of this patient prescription will be propably  ${predict}`}
           open={selectedp === Prescription && open === true}
           onConfirm={handleOK}
           onCancel={() => setOpen(false)}
