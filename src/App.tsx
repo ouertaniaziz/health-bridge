@@ -6,13 +6,21 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes, polyclinicRoutes ,donorRoutes} from './routing';
+import {
+  defaultRoutes,
+  sessionRoutes,
+  doctorRoutes,
+  patientRoutes,
+  polyclinicRoutes,
+  donorRoutes
+} from './routing';
 
 import './App.less';
 import './App.scss';
 import { useHideLoader } from './hooks/useHideLoader';
 import { PatientProvider } from './layout/components/Patientoffice/provider/PatientProvider';
 import Chatgptmodal from './layout/components/Patientoffice/chatgptmodal';
+import WithSubnavigation from './layout/components/navigationBar/navigation';
 
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
@@ -44,7 +52,6 @@ const App = () => {
   const [patient, setpatient] = useState(false);
   const [polyclinic, setpolyclinic] = useState(true);
   const [donor, setdonor] = useState(true);
-  
 
   const [NotLogged, setNotLogged] = useState(false);
 
@@ -60,8 +67,6 @@ const App = () => {
       } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
         setdonor(false);
       } else setNotLogged(true);
-     
-      
     }
   }, [localStorage]);
 
@@ -69,7 +74,10 @@ const App = () => {
   return (
     <Switch>
       <Route path='/public'>
-        <SessionRoutes />
+        <>
+          <WithSubnavigation />
+          <SessionRoutes />
+        </>
       </Route>
 
       <Route path='/doctor'>
@@ -88,9 +96,9 @@ const App = () => {
         </PatientProvider>
       </Route>
       <Route path='/donor'>
-          <VerticalLayout>
-            <DonorRoutes layout='donor' />
-          </VerticalLayout>
+        <VerticalLayout>
+          <DonorRoutes layout='donor' />
+        </VerticalLayout>
       </Route>
 
       <Route path='/polyclinic'>
@@ -99,7 +107,7 @@ const App = () => {
         </VerticalLayout>
       </Route>
 
-      {(doctor || patient ||  !localStorage.getItem('user')) && (
+      {(doctor || patient || !localStorage.getItem('user')) && (
         <Route path='/'>
           {doctor ? (
             <Redirect to='/doctor/settings' />

@@ -1,4 +1,7 @@
 import { IRoute } from '../interfaces/routing';
+import GridBlurredBackdrop from '../layout/components/community/Community';
+import ContactFormWithSocialButtons from '../layout/components/contact/Contact';
+import SplitScreen from '../layout/components/home/Home';
 
 import NotFound from '../pages/sessions/404';
 import InternalError from '../pages/sessions/500';
@@ -21,5 +24,17 @@ export const sessionRoutes: IRoute[] = [
   {
     path: 'sign-up',
     component: SignUp
+  },
+  {
+    path: 'home',
+    component: SplitScreen
+  },
+  {
+    path: 'contact',
+    component: ContactFormWithSocialButtons
+  },
+  {
+    path: 'community',
+    component: GridBlurredBackdrop
   }
 ];

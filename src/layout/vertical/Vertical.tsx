@@ -31,7 +31,7 @@ type Props = {
 
 const VerticalLayout = ({ children }: Props) => {
   const dispatch = useDispatch();
-
+  const logo = require('./logo.png');
   const settings = useSelector((state: IAppState) => state.settings);
   const pageData = useSelector((state: IAppState) => state.pageData);
 
@@ -62,7 +62,8 @@ const VerticalLayout = ({ children }: Props) => {
         const result = await axios('/data/menu-donor.json');
         setorientation('donor');
         setMenuData(result.data);
-    }}
+      }
+    }
 
     fetchMenuData().catch((err) => console.log('Server Error', err));
   }, []);
@@ -96,7 +97,7 @@ const VerticalLayout = ({ children }: Props) => {
       background={settings.sidebarBg}
       orientation='vertical'
     >
-      <Logo src={LogoSvg} />
+      <Logo src={logo} />
 
       <Menu
         onCloseSidebar={onSidebarToggle}
