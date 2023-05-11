@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { IBilling } from '../interfaces/patient';
 import axios from 'axios';
+import { IMedicationModel } from '../interfaces/medication';
 
 async function getBillings() {
   const result = await axios.get('./data/patient-billings.json');
@@ -36,3 +37,4 @@ export function useGetPayments(): [IBilling[], React.Dispatch<any>] {
 
   return [payments, setPayments];
 }
+

@@ -1,0 +1,62 @@
+$color_1: #be9656;
+$color_2: #999999;
+$color_3: #444444;
+$font-family_1: 'Varela Round', Arial, Helvetica, sans-serif;
+$font-family_2: 'Josefin Sans', Arial, Helvetica, sans-serif;
+$font-family_3: 'Lora', serif;
+
+.post {
+  width: 385px;
+  margin: 0px 25px 40px 25px;
+  display: flex;
+  flex-direction: column;
+}
+.postImg {
+  width: 385px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+}
+.postCat {
+  font-family: $font-family_1;
+  font-weight: 400;
+  font-size: 11px;
+  color: $color_1;
+  line-height: 19px;
+  margin-top: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.postTitle {
+  font-family: $font-family_2;
+  font-size: 24px;
+  font-weight: 900;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.postDate {
+  font-family: $font-family_3;
+  font-style: italic;
+  font-size: 13px;
+  font-weight: 400;
+  color: $color_2;
+  margin-top: 15px;
+}
+.postDesc {
+  font-family: $font-family_1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: $color_3;
+  margin-top: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}

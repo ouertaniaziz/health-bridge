@@ -6,12 +6,21 @@ import VerticalLayout from './layout/vertical/Vertical';
 import HorizontalLayout from './layout/horizontal/Horizontal';
 
 import NotFound from './pages/sessions/404';
-import { defaultRoutes, sessionRoutes, doctorRoutes, patientRoutes, pharmacistRoutes } from './routing';
+import {
+  defaultRoutes,
+  sessionRoutes,
+  doctorRoutes,
+  patientRoutes, pharmacistRoutes,
+  polyclinicRoutes,
+  donorRoutes
+} from './routing';
 
 import './App.less';
 import './App.scss';
 import { useHideLoader } from './hooks/useHideLoader';
 import { PatientProvider } from './layout/components/Patientoffice/provider/PatientProvider';
+import Chatgptmodal from './layout/components/Patientoffice/chatgptmodal';
+import WithSubnavigation from './layout/components/navigationBar/navigation';
 
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
@@ -33,38 +42,53 @@ const Routes = ({ routes, layout = '' }) => (
 const DefaultRoutes = ({ layout }) => <Routes routes={defaultRoutes} layout={layout} />;
 const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layout} />;
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
+const DonorRoutes = ({ layout }) => <Routes routes={donorRoutes} layout={layout} />;
+const PolyclinicRoutes = ({ layout }) => <Routes routes={polyclinicRoutes} layout={layout} />;
 const PharmacistRoutes = ({ layout }) => <Routes routes={pharmacistRoutes} layout={layout} />;
 // const PharmacistRoutes = ({ layout }) => <Routes routes={pharmacistRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
 const App = () => {
-  const [doctor, setdoctor] = useState(true);
-  const [patient, setpatient] = useState(true);
+  const [doctor, setdoctor] = useState(false);
+  const [patient, setpatient] = useState(false);
+  const [polyclinic, setpolyclinic] = useState(true);
+  const [donor, setdonor] = useState(true);
+
+  const [NotLogged, setNotLogged] = useState(false);
   const [pharmacist, setpharmacist] = useState(true);
 
   useEffect(() => {
+    console.log(localStorage.getItem('user'), 'test');
     if (localStorage.getItem('user')) {
       if (JSON.parse(localStorage.getItem('user')).role === 'patient') {
-        setpatient(false);
+        setpatient(true);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
-        setdoctor(false);
+        setdoctor(true);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        setpolyclinic(false);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
+        setdonor(false);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'pharmacist') {
         setpharmacist(false);
-      }
+      } else setNotLogged(true);
 
     }
-  }, []);
+  }, [localStorage]);
 
   useHideLoader();
   return (
     <Switch>
       <Route path='/public'>
-        <SessionRoutes />
+        <>
+          <WithSubnavigation />
+          <SessionRoutes />
+        </>
       </Route>
 
       <Route path='/doctor'>
         <VerticalLayout>
+          <Chatgptmodal />
           <DoctorRoutes layout='doctor' />
         </VerticalLayout>
       </Route>
@@ -72,9 +96,15 @@ const App = () => {
       <Route path='/patient'>
         <PatientProvider>
           <VerticalLayout>
+            <Chatgptmodal />
             <PatientRoutes layout='patient' />
           </VerticalLayout>
         </PatientProvider>
+      </Route>
+      <Route path='/donor'>
+        <VerticalLayout>
+          <DonorRoutes layout='donor' />
+        </VerticalLayout>
       </Route>
 
       <Route path='/pharmacist'>
@@ -85,9 +115,23 @@ const App = () => {
        
       </Route>
 
-      <Route path='/' exact>
-        <Redirect to='/public/sign-in' />
+      <Route path='/polyclinic'>
+        <VerticalLayout>
+          <PolyclinicRoutes layout='polyclinic' />
+        </VerticalLayout>
       </Route>
+
+      {(doctor || patient || !localStorage.getItem('user')) && (
+        <Route path='/'>
+          {doctor ? (
+            <Redirect to='/doctor/settings' />
+          ) : patient ? (
+            <Redirect to='/patient/dashboard' />
+          ) : (
+            <Redirect to='/public/sign-in' />
+          )}
+        </Route>
+      )}
       <Route path='/vertical'>
         <VerticalLayout>
           <DefaultRoutes layout='vertical' />

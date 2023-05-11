@@ -32,7 +32,7 @@ export interface IUser {
   insuranceInformation?: string;
   symptoms?: string;
   testResults?: string;
-  role?: 'patient' | 'doctor' | 'pharmacist' | 'adminpolyclinic' | 'admin';
+  role?: 'patient' | 'doctor' | 'pharmacist' | 'adminpolyclinic' | 'donor'| 'admin';
   roles?: IRole['_id'][];
   speciality?: 'carcino' | 'cardiologist' | 'psychiatrist';
   emailtoken?: string;
@@ -47,7 +47,7 @@ export interface IUser {
   city?: string;
   postal_code?: number;
   state?: string;
-  img?: string | ArrayBuffer;
+  img?: string;
 }
 export interface IUserLink {
   icon: string;

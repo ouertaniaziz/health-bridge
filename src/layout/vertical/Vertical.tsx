@@ -25,16 +25,13 @@ import { IAppState } from '../../interfaces/app-state';
 import './Vertical.scss';
 import { useHideLoader } from '../../hooks/useHideLoader';
 
-
 type Props = {
   children: any;
 };
 
 const VerticalLayout = ({ children }: Props) => {
-
-
   const dispatch = useDispatch();
-
+  const logo = require('./logo.png');
   const settings = useSelector((state: IAppState) => state.settings);
   const pageData = useSelector((state: IAppState) => state.pageData);
 
@@ -58,6 +55,15 @@ const VerticalLayout = ({ children }: Props) => {
       }  else if (JSON.parse(localStorage.getItem('user')).role === 'pharmacist') {
         const result = await axios('/data/menu-pharmacist.json');
         setorientation('pharmacist');
+        setMenuData(result.data);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
+        const result = await axios('/data/menu-polyclinic.json');
+        setorientation('polyclinic');
+
+        setMenuData(result.data);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
+        const result = await axios('/data/menu-donor.json');
+        setorientation('donor');
         setMenuData(result.data);
       }
 
@@ -95,7 +101,7 @@ const VerticalLayout = ({ children }: Props) => {
       background={settings.sidebarBg}
       orientation='vertical'
     >
-      <Logo src={LogoSvg} />
+      <Logo src={logo} />
 
       <Menu
         onCloseSidebar={onSidebarToggle}
@@ -103,8 +109,6 @@ const VerticalLayout = ({ children }: Props) => {
         orientation={orientation}
         data={menuData}
       />
-
-      <AddPatient />
 
       <Menu className='assistant-menu' orientation='vertical'>
         <NavLink className='link' to='/vertical/settings' activeClassName='active' replace>

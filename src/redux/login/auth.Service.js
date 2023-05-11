@@ -66,11 +66,30 @@ export const getPharmacist = () => {
       return response.data;
     });
 };
+
+//face
+const loginwithface = (usernam) => {
+  console.log('username:', usernam);
+
+  return axiosInstance
+    .post('/facelogin', {
+      username: usernam
+    })
+    .then((response) => {
+      if (response.data.accessToken) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', JSON.stringify(response.data.accessToken));
+      }
+
+      return response.data;
+    });
+};
 const authService = {
   addUser,
   login,
   logout,
   getDoctor,
-  getPharmacist
+  getPharmacist,
+  loginwithface
 };
 export default authService;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar, Button, Card } from 'antd';
 import DOMPurify from 'dompurify';
 
@@ -7,9 +7,18 @@ import { IPrescription } from '../../../interfaces/prescription';
 import moment from 'moment';
 
 type Props = { prescription: IPrescription; className?: string };
-
 const Prescription = ({ prescription, className = '' }: Props) => {
+  const [verified, setVerified] = useState(false);
+
   const cleanedHtml = DOMPurify.sanitize(prescription.qrCodeVerif);
+
+  useEffect(() => {
+    if (prescription.Polyclinicstatus === 'Approved') {
+      console.log(prescription);
+
+      setVerified(true);
+    }
+  }, []);
 
   return (
     <>
@@ -28,7 +37,7 @@ const Prescription = ({ prescription, className = '' }: Props) => {
           </div>
 
           <div className='button-box pb-2'>
-            <Button type='primary' disabled={!prescription.verified}>
+            <Button type='primary' disabled={!verified}>
               More <FileDoneOutlined className='ml-2' />
             </Button>
           </div>

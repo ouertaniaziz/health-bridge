@@ -8,7 +8,7 @@
     "icon": {
       "class": "icofont-thermometer-alt"
     },
-    "routing": "default-dashboard"
+    "routing": "Patient-dashboard"
   },
 
   {
@@ -20,17 +20,31 @@
   },
 
   {
-    "title": "Appointments",
-    "icon": {
-      "class": "icofont-stethoscope-alt"
-    },
-    "routing": "appointments"
-  },
-  {
     "title": "prescription ",
     "icon": {
       "class": "icofont-ui-settings"
     },
     "routing": "prescriptions"
+  },
+  {
+    "title": "Doctors",
+    "icon": {
+      "class": "icofont-doctor"
+    },
+    "routing": "doctors"
+  },
+  {
+    "title": "Appointments",
+    "icon": {
+      "class": "icofont-calendar"
+    },
+    "routing": "allAppoiments"
+  },
+  {
+    "title": "Chatroom",
+    "icon": {
+      "class": "icofont icofont-chat"
+    },
+    "routing": "chatroom"
   }
 ]

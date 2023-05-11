@@ -1,3 +1,5 @@
+import { IDoctor } from './doctor';
+
 export interface IPatient {
   id?: string;
   img?: string | ArrayBuffer;
@@ -12,21 +14,34 @@ export interface IPatient {
   address: string;
   status?: string;
   lastVisit?: string;
+  _id?:string;
 }
 
 export interface IAppointment {
-  img: string;
-  name: string;
-  email: string;
-  number: string;
-  date: string;
-  fromTo: string;
-  doctor: string;
-  injury: string;
-  from: string;
-  to: string;
-  patientId: string;
+  id?: string;
+  img?: string;
+  name?: string;
+  email?: string;
+  number?: string;
+  date?: string;
+  fromTo?: string;
+  doctor?: string;
+  injury?: string;
+  from?: string;
+  to?: string;
+  patientId?: string;
 }
+export interface IAppointmentPatient {
+  _id?: string;
+  status?: string;
+  doctor?: IDoctor;
+  patient?: IPatient;
+  date?: Date;
+  time?: string;
+  reason?: string;
+  __v?: number;
+}
+
 export interface PrescriptionTableProps {
   data: IMedication[];
   actions: (medication: IMedication) => JSX.Element;

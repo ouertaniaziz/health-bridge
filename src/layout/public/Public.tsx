@@ -8,9 +8,7 @@ type Props = { children: ReactNode; bgImg?: string; transparent?: boolean };
 const PublicLayout = ({ children, bgImg, transparent = false }: Props) => (
   <div className='public-layout' style={{ backgroundImage: `url(${bgImg})` }}>
     <div className={`content-box ${transparent ? 'transparent' : null}`}>
-      <div className='content-header'>
-        <Logo src={LogoSvg} />
-      </div>
+      <div className='content-header'></div>
       <div className='content-body'>{children}</div>
     </div>
   </div>

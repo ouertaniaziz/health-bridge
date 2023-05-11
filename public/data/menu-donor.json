@@ -1,0 +1,36 @@
+[
+    {
+      "title": "Donor",
+      "groupTitle": true
+    },
+    {
+      "title": "Dashboard",
+      "icon": {
+        "class": "icofont-thermometer-alt"
+      },
+      "routing": "dashboard-donor"
+    },
+
+    {
+        "title": "Payments",
+        "icon": {
+          "class": "icofont-pay"
+        },
+        "routing": "PaymentsDonor"
+      },
+      {
+        "title": "Medications-List",
+        "icon": {
+          "class": "icofont-pay"
+        },
+        "routing": "Donormedications"
+      },
+      {
+        "title": "Materials-List",
+        "icon": {
+          "class": "icofont-pay"
+        },
+        "routing": "Donormaterials"
+      }
+  ]
+  

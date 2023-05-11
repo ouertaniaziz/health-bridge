@@ -9,12 +9,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import { ChakraProvider } from '@chakra-ui/react';
 
-createRoot(document.getElementById('root')).render( <Provider store={store}>
-  <HashRouter>
-    <App />
-  </HashRouter>
-</Provider>)
+createRoot(document.getElementById('root')).render(
+  <ChakraProvider>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
+  </ChakraProvider>
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

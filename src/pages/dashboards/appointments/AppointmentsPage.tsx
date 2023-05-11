@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { Button } from 'antd';
 
@@ -19,7 +19,7 @@ const pageData: IPageData = {
   fulFilled: false,
   breadcrumbs: [
     {
-      title: 'Medicine',
+      title: 'Dashbord',
       route: 'default-dashboard'
     },
     {
@@ -27,11 +27,9 @@ const pageData: IPageData = {
     }
   ]
 };
-
 const AppointmentsPage = () => {
   const doctorId = JSON.parse(localStorage.getItem('user'))?.id;
   const history = useHistory();
-  usePageData(pageData);
   const [appointments, setAppointments] = useFetchPageData<IAppointment[]>(
     `./appointments/doctor/${doctorId}`,
     []
@@ -87,27 +85,28 @@ const AppointmentsPage = () => {
       </Button>
     </div>
   );
+  if (appointments.length === 0) return <div>loading</div>;
+  else
+    return (
+      <>
+        <AppointmentsTable data={appointments} actions={appointmentsActions} />
 
-  return (
-    <>
-      <AppointmentsTable data={appointments} actions={appointmentsActions} />
+        <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
 
-      <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
+        <AddAppointment
+          onClose={closeAddingModal}
+          visible={addingModalVisibility}
+          onSubmit={addAppointment}
+        />
 
-      <AddAppointment
-        onClose={closeAddingModal}
-        visible={addingModalVisibility}
-        onSubmit={addAppointment}
-      />
-
-      <EditAppointment
-        appointment={selectedAppointment}
-        visible={!!selectedAppointment}
-        onClose={closeModal}
-        onEdited={handleEdit}
-      />
-    </>
-  );
+        <EditAppointment
+          appointment={selectedAppointment}
+          visible={!!selectedAppointment}
+          onClose={closeModal}
+          onEdited={handleEdit}
+        />
+      </>
+    );
 };
 
 export default AppointmentsPage;

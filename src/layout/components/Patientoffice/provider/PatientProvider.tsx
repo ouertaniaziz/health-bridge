@@ -4,8 +4,10 @@ import { getpatient } from '../service/patientservice';
 import { IRecord } from '../../../../interfaces/Record';
 import { response } from 'express';
 import { useHideLoader } from '../../../../hooks/useHideLoader';
+import { useFetchPageData } from '../../../../hooks/usePage';
+import usePost from '../../../../hooks/usePost';
 //import { getDoctor } from '../login/service/auth.Service';
-const username = JSON.parse(localStorage.getItem('user'))?.username;
+
 // Créez un contexte et exportez-le
 
 export type Patientcontextype = {
@@ -26,10 +28,14 @@ export const PatientProvider = ({ children }: Patientcontextprovidertype) => {
   const [user, setuser] = useState<Partial<IPatientModel>>(null);
   const [records, setrecords] = useState<IRecord[]>(null);
   const [stop, setstop] = useState(false);
-
+  const username = JSON.parse(localStorage.getItem('user'))?.username;
+  const  [response,setresponse]=usePost('/patient/getpatient',{username:username},(data)=>{
+    console.log('data',data)
+  })
   useEffect(() => {
     async function getUserInfo() {
       try {
+        
         const response = await getpatient(username);
         setpatient(response.patient);
         setuser(response.user);

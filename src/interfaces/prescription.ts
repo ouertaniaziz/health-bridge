@@ -4,12 +4,12 @@ import { IDoctor } from './doctor';
 import { ITraitement } from './traitement';
 
 export interface IPrescription extends Document {
-  patient: Types.ObjectId | IPatient;
-  doctor: IDoctor;
-  date: Date;
-  verified: boolean;
-  qrCodeVerif: string;
-  traitement: Types.ObjectId[] | ITraitement[];
-  //new
+  patient?: Types.ObjectId | IPatient;
+  doctor?: IDoctor;
+  date?: Date;
+  verified?: boolean;
+  qrCodeVerif?: string;
   Polyclinicstatus?: string;
-}
+
+  traitement?: Types.ObjectId[] | ITraitement[];
+  }
