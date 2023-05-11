@@ -10,7 +10,7 @@ import {
   defaultRoutes,
   sessionRoutes,
   doctorRoutes,
-  patientRoutes,
+  patientRoutes, pharmacistRoutes,
   polyclinicRoutes,
   donorRoutes
 } from './routing';
@@ -44,6 +44,8 @@ const DoctorRoutes = ({ layout }) => <Routes routes={doctorRoutes} layout={layou
 const PatientRoutes = ({ layout }) => <Routes routes={patientRoutes} layout={layout} />;
 const DonorRoutes = ({ layout }) => <Routes routes={donorRoutes} layout={layout} />;
 const PolyclinicRoutes = ({ layout }) => <Routes routes={polyclinicRoutes} layout={layout} />;
+const PharmacistRoutes = ({ layout }) => <Routes routes={pharmacistRoutes} layout={layout} />;
+// const PharmacistRoutes = ({ layout }) => <Routes routes={pharmacistRoutes} layout={layout} />;
 
 const SessionRoutes = () => <Routes routes={sessionRoutes} layout='public' />;
 
@@ -54,6 +56,7 @@ const App = () => {
   const [donor, setdonor] = useState(true);
 
   const [NotLogged, setNotLogged] = useState(false);
+  const [pharmacist, setpharmacist] = useState(true);
 
   useEffect(() => {
     console.log(localStorage.getItem('user'), 'test');
@@ -66,7 +69,10 @@ const App = () => {
         setpolyclinic(false);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'donor') {
         setdonor(false);
+      } else if (JSON.parse(localStorage.getItem('user')).role === 'pharmacist') {
+        setpharmacist(false);
       } else setNotLogged(true);
+
     }
   }, [localStorage]);
 
@@ -99,6 +105,14 @@ const App = () => {
         <VerticalLayout>
           <DonorRoutes layout='donor' />
         </VerticalLayout>
+      </Route>
+
+      <Route path='/pharmacist'>
+       
+          <VerticalLayout>
+            <PharmacistRoutes layout='pharmacist' />
+          </VerticalLayout>
+       
       </Route>
 
       <Route path='/polyclinic'>

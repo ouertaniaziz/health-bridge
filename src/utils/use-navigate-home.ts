@@ -21,6 +21,12 @@ export function useNavigateDonor() {
   return useCallback(() => history.replace('/donor/dashboard-donor'), []);
 }
 
+export function useNavigatePharmacist() {
+  const history = useHistory();
+  return useCallback(() => history.replace('/pharmacist/default-dashboard'), []);
+}
+
+
 export function useNavigatePrescription(id) {
   const history = useHistory();
   return useCallback(() => history.replace(), []);

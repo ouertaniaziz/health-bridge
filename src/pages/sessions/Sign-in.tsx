@@ -13,7 +13,8 @@ import {
   useNavigateHome,
   useNavigatePatient,
   useNavigateDonor,
-  useNavigatePolyclinic
+  useNavigatePolyclinic, 
+  useNavigatePharmacist 
 } from '../../utils/use-navigate-home';
 import authService from '../../redux/login/auth.Service';
 import { Modal } from 'antd';
@@ -31,6 +32,7 @@ const SignIn = () => {
   const navigateHome = useNavigateHome();
   const navigateDoctor = useNavigateDoctor();
   const navigatePatient = useNavigatePatient();
+  const navigatePharmacist = useNavigatePharmacist();
   const NavigateDonor = useNavigateDonor();
   const navigatePolyclinic = useNavigatePolyclinic();
   const dispatch = useDispatch();
@@ -49,9 +51,8 @@ const SignIn = () => {
               } else if (currentUser.role.includes('patient')) {
                 navigatePatient();
               } else if (currentUser.role.includes('pharmacist')) {
-                console.log('first');
+                navigatePharmacist();
               } else if (currentUser.role.includes('donor')) {
-                console.log('first');
                 NavigateDonor();
               } else if (currentUser.role.includes('adminpolyclinic')) {
                 navigatePolyclinic();

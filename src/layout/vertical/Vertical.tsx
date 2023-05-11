@@ -51,7 +51,10 @@ const VerticalLayout = ({ children }: Props) => {
       } else if (JSON.parse(localStorage.getItem('user')).role === 'doctor') {
         const result = await axios('/data/menu-doctor.json');
         setorientation('doctor');
-
+        setMenuData(result.data);
+      }  else if (JSON.parse(localStorage.getItem('user')).role === 'pharmacist') {
+        const result = await axios('/data/menu-pharmacist.json');
+        setorientation('pharmacist');
         setMenuData(result.data);
       } else if (JSON.parse(localStorage.getItem('user')).role === 'adminpolyclinic') {
         const result = await axios('/data/menu-polyclinic.json');
@@ -63,6 +66,7 @@ const VerticalLayout = ({ children }: Props) => {
         setorientation('donor');
         setMenuData(result.data);
       }
+
     }
 
     fetchMenuData().catch((err) => console.log('Server Error', err));

@@ -12,4 +12,4 @@ export interface IPrescription extends Document {
   Polyclinicstatus?: string;
 
   traitement?: Types.ObjectId[] | ITraitement[];
-}
+  }
